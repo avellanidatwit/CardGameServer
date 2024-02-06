@@ -1,6 +1,7 @@
 package files;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Deck {
 	protected int numberOfCards;
@@ -22,7 +23,17 @@ public class Deck {
 	public void decrementNumberOfCards() {
 		this.numberOfCards--;
 	}
+	
 	public ArrayList<Card> returnCards() {
-		return cards;
+		return this.cards;
+	}
+	public void addCard(Card c) {
+		this.cards.add(c);
+	}
+	public void removeCard(Card c) {
+		this.cards.remove(c);
+	}
+	public void shuffleDeck() {
+		Collections.shuffle(this.cards);
 	}
 }
