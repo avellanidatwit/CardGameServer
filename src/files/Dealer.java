@@ -76,4 +76,14 @@ public class Dealer extends TurnManager implements DealerControls {
 		// TODO Auto-generated method stub
 		
 	}
+	/**
+	 * Triggers effects on a hand based upon a given card.
+	 * @param c Card to base effects from.
+	 * @param h Hand to affect.
+	 */
+	@Override
+	public void triggerEffects(Card c, UserHand h) {
+		// TODO Auto-generated method stub
+		
+	}
 }

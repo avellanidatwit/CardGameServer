@@ -3,7 +3,7 @@ package files;
  * A class to make a card, for use in the game.
  * @author evelyn
  */
-public class Card {
+public abstract class Card {
 	final protected String NAME;
 	final protected String DESCRIPTION;
 	/**

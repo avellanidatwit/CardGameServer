@@ -11,9 +11,9 @@ public interface CardEffects extends DealerControls {
 	String getEffects();
 	/**
 	 * Sets a cards effects.
-	 * @param e effects to set.
+	 * @param e effects to mirror from a card.
 	 */
-	void setEffects(Object e);
+	void setEffects(Card e);
 	/**
 	 * Gets a card's type.
 	 * @return The card's type.
