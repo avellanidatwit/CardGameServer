@@ -9,10 +9,10 @@ import java.util.Scanner;
 
 /**
  * This class implements the java socket client
- * @author Pankaj
+ * @author dominic
  *
  */
-public class JavaClientExample {
+public class JavaClient {
 
     public static void main(String[] args) throws UnknownHostException, IOException, ClassNotFoundException, InterruptedException{
         //get the localhost IP address, if the server is running on some other IP, you need to use that

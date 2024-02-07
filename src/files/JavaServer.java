@@ -9,10 +9,10 @@ import java.util.List;
 
 /**
  * This class implements java Socket server
- * @author pankaj
+ * @author dominic
  *
  */
-public class JavaServerExample {
+public class JavaServer {
     
     //static ServerSocket variable
     private static ServerSocket server;
