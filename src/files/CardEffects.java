@@ -4,6 +4,10 @@ package files;
  * @author evelyn
  */
 public interface CardEffects {
+	/**
+	 * Gets a cards effects.
+	 * @return The card's effects.
+	 */
 	String getEffects();
 	/**
 	 * Sets a cards effects.
