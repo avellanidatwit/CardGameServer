@@ -22,9 +22,5 @@ public interface DealerControls {
 	 * Method to check if there are interactions with any given cards that are in play at that time.
 	 */
 	void checkInteractions();
-	/**
-	 * Returns the type of card.
-	 * @return Card type to return.
-	 */
 
 }

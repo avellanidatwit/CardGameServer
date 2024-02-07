@@ -1,18 +1,31 @@
 package files;
 
+import java.io.IOException;
 import java.util.Collections;
 /**
  * Class that implements the dealer, and utilizes it to deal cards/trigger effects/manage turns.
  * @author evelyn
  */
-public class Dealer implements DealerControls {
+public class Dealer extends TurnManager implements DealerControls {
 	
 	protected Deck mainDeck;
 	/**
+	 * 2 arg constructor
+	 * @param d Deck to set.
+	 * @param port Port for server.
+	 * @throws IOException 
+	 */
+	public Dealer(Deck d, int port) throws IOException {
+		super(port);
+		mainDeck = d;
+	}
+	/**
 	 * 1 arg constructor
 	 * @param d Deck to set.
+	 * @throws IOException
 	 */
-	public Dealer(Deck d) {
+	public Dealer(Deck d) throws IOException {
+		super(3333);
 		mainDeck = d;
 	}
 	/**
