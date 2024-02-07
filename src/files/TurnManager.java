@@ -13,29 +13,29 @@ import java.net.UnknownHostException;
  * Manages the player's turns, and game as a whole.
  */
 public abstract class TurnManager extends VFXMethods {
-	private final ServerSocket server;
-	protected final int port;
+	private final ServerSocket SERVER;
+	protected final int PORT;
 	protected TurnStates currentPhase;
 
 	/**
 	 * 1 arg constructor.
-	 * @param port Port to set.
+	 * @param PORT PORT to set.
 	 * @throws IOException
 	 */
-	public TurnManager(int port) throws IOException {
-		server = new ServerSocket(port);
-		this.port = port;
+	public TurnManager(int PORT) throws IOException {
+		SERVER = new ServerSocket(PORT);
+		this.PORT = PORT;
 		currentPhase = TurnStates.USER1PLAY;
 	}
 	/**
 	 * 2 arg constructor.
-	 * @param port Port to set.
+	 * @param PORT PORT to set.
 	 * @param currentTurnPhase Turn phase to set.
 	 * @throws IOException
 	 */
-	public TurnManager(int port, TurnStates currentTurnPhase) throws IOException {
-		server = new ServerSocket(port);
-		this.port = port;
+	public TurnManager(int PORT, TurnStates currentTurnPhase) throws IOException {
+		SERVER = new ServerSocket(PORT);
+		this.PORT = PORT;
 		currentPhase = currentTurnPhase;
 	}
 	/**
@@ -43,22 +43,22 @@ public abstract class TurnManager extends VFXMethods {
 	 * @throws IOException
 	 */
 	public TurnManager() throws IOException {
-		server = new ServerSocket(3333);
-		this.port = 3333;
+		SERVER = new ServerSocket(3333);
+		this.PORT = 3333;
 	}
 	/**
 	 * Closes the server-side connection.
 	 * @throws IOException
 	 */
 	public void serverClose() throws IOException {
-		server.close();
+		SERVER.close();
 	}
 	/**
 	 * Initializes the server-side connection.
 	 * @throws IOException
 	 */
 	public void serverInit() throws IOException {
-		Socket s = server.accept();
+		Socket s = SERVER.accept();
 	}
 	/**
 	 * Advances the turn forward 1 move, resets to 1st move if at end.;

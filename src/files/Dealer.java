@@ -15,8 +15,8 @@ public class Dealer extends TurnManager implements DealerControls {
 	 * @param port Port for server.
 	 * @throws IOException 
 	 */
-	public Dealer(Deck d, int port) throws IOException {
-		super(port);
+	public Dealer(Deck d, int PORT) throws IOException {
+		super(PORT);
 		mainDeck = d;
 	}
 	/**
