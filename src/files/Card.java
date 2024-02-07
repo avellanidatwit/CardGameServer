@@ -48,6 +48,7 @@ public class Card {
 			if(temp.getName().equals(this.name) && temp.getDescription().equals(this.description)) {
 				return true;
 			}
+			
 		}
 		return false;
 	}
