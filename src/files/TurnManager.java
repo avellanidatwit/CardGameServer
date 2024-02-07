@@ -12,7 +12,7 @@ import java.net.UnknownHostException;
 /**
  * Manages the player's turns, and game as a whole.
  */
-public abstract class TurnManager {
+public abstract class TurnManager extends VFXMethods {
 	private final ServerSocket server;
 	protected final int port;
 	protected TurnStates currentPhase;
@@ -61,12 +61,8 @@ public abstract class TurnManager {
 		Socket s = server.accept();
 	}
 	/**
-	 * Updates the visuals on the JavaFX side.
+	 * Advances the turn forward 1 move, resets to 1st move if at end.;
 	 */
-	public void visualUpdate() {
-		
-	}
-	
 	public void advanceTurn() {
 		if(this.currentPhase.equals(TurnStates.USER1PLAY)) {
 			this.currentPhase = TurnStates.USER2PLAY;
@@ -88,6 +84,9 @@ public abstract class TurnManager {
 		}
 		else if(this.currentPhase.equals(TurnStates.RESET)) {
 			this.currentPhase = TurnStates.AWAITFORSYNC;
+		}
+		else {
+			this.currentPhase = TurnStates.USER1PLAY;
 		}
 	}
 }
