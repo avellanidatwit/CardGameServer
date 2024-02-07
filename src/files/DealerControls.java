@@ -14,6 +14,12 @@ public interface DealerControls {
 	 */
 	void triggerEffects(Card c);
 	/**
+	 * Triggers effects on a hand based upon a given card.
+	 * @param c Card to base effects from.
+	 * @param h Hand to affect.
+	 */
+	void triggerEffects(Card c, UserHand h);
+	/**
 	 * Method to check if a given card has interactions with another given card.
 	 * @param c Card to check against.
 	 */
@@ -22,9 +28,5 @@ public interface DealerControls {
 	 * Method to check if there are interactions with any given cards that are in play at that time.
 	 */
 	void checkInteractions();
-	/**
-	 * Returns the type of card.
-	 * @return Card type to return.
-	 */
 
 }

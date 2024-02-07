@@ -3,7 +3,7 @@ package files;
  * Interface for the sole purpose of setting up cards, which each card type will be defined in its own class, therefore implementing this interface.
  * @author evelyn
  */
-public interface CardEffects extends DealerControls {
+public interface CardEffects {
 	/**
 	 * Gets a cards effects.
 	 * @return The card's effects.
@@ -11,12 +11,17 @@ public interface CardEffects extends DealerControls {
 	String getEffects();
 	/**
 	 * Sets a cards effects.
-	 * @param e effects to set.
+	 * @param e effects to mirror from a card.
 	 */
-	void setEffects(Object e);
+	void setEffects(Card e);
 	/**
 	 * Gets a card's type.
 	 * @return The card's type.
 	 */
-	String getCardType();
+	CardTypes getCardType();
+	/**
+	 * Sets a card type.
+	 * @param t Card type to set.
+	 */
+	void setCardType(CardTypes t);
 }

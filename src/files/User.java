@@ -7,12 +7,36 @@ public class User {
 	
 	protected UserHand hand;
 	final protected String USERNAME;
+	protected int id;
 	/**
 	 * 1-arg Constructor
 	 * @param username A user's username.
 	 */
 	public User(String username) {
+		if(id == 0) {
+			this.id = 0;
+		}
+		else {
+			this.id = id++;
+			id++;
+		}
 		this.USERNAME = username;
+	}
+	/**
+	 * 2 arg constructor
+	 * @param username A user's username.
+	 * @param h The hand to set under the given user object.
+	 */
+	public User(String username, UserHand h) {
+		if(id == 0) {
+			this.id = 0;
+		}
+		else {
+			this.id = id++;
+			id++;
+		}
+		this.USERNAME = username;
+		this.hand = h;
 	}
 	/**
 	 * Returns the user's username.
