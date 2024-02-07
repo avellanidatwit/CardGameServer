@@ -1,5 +1,8 @@
 package files;
-
+/**
+ * Enum for the purpose of controlling the turns
+ * @author evelyn
+ */
 public enum TurnStates {
 	USER1PLAY,
 	USER2PLAY,
@@ -7,6 +10,6 @@ public enum TurnStates {
 	TRIGGEREFFECTS,
 	SYNCDECK,
 	CHECKWINCONDITIONS,
-	RESET
-	
+	RESET,
+	AWAITFORSYNC
 }
