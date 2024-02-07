@@ -9,6 +9,11 @@ public class Card {
 		this.description = description;
 	}
 	
+	public Card() {
+		this.name = null;
+		this.description = null;
+	}
+	
 	public String getName() {
 		return name;
 	}
