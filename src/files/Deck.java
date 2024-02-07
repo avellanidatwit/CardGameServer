@@ -81,4 +81,18 @@ public class Deck {
 	public String toString() {
 		return "Number of Cards: " + this.numberOfCards + "\nCards: " + this.cards;
 	}
+	@Override
+	public boolean equals(Object o) {
+		if(o instanceof Deck) {
+			Deck temp = (Deck) o;
+			this.cards.sort(null);
+			temp.cards.sort(null);
+			if(this.cards.equals(temp.cards)) {
+				this.shuffleDeck();
+				return true;
+			}
+		}
+		return false;
+		
+	}
 }
