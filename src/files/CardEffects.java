@@ -5,14 +5,27 @@ package files;
  */
 public interface CardEffects {
 	String getEffects();
-	
+	/**
+	 * Sets a cards effects.
+	 * @param e effects to set.
+	 */
 	void setEffects(Object e);
-	
+	/**
+	 * Triggers the effects on the other users/cards on the field.
+	 */
 	void triggerEffects();
-	
+	/**
+	 * Method to check if a given card has interactions with another given card.
+	 * @param c Card to check against.
+	 */
 	void checkInteractions(Card c);
-	
+	/**
+	 * Method to check if there are interactions with any given cards that are in play at that time.
+	 */
 	void checkInteractions();
-	
+	/**
+	 * Returns the type of card.
+	 * @return Card type to return.
+	 */
 	String getCardType();
 }
