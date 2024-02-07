@@ -36,4 +36,9 @@ public class Deck {
 	public void shuffleDeck() {
 		Collections.shuffle(this.cards);
 	}
+	
+	@Override
+	public String toString() {
+		return "Number of Cards: " + this.numberOfCards + "\nCards: " + this.cards;
+	}
 }

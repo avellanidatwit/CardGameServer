@@ -11,4 +11,9 @@ public class UserHand extends Deck {
 	public String getHandOwner() {
 		return handOwner;
 	}
+	
+	@Override
+	public String toString() {
+		return "Number of Cards: " + super.numberOfCards + "\nCards: " + super.cards + "\nHand Owner: " + this.handOwner;
+	}
 }
