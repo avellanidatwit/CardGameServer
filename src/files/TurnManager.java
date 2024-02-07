@@ -40,4 +40,8 @@ public class TurnManager {
 	public void serverClose() throws IOException {
 		server.close();
 	}
+	
+	public void serverInit() throws IOException {
+		Socket s = server.accept();
+	}
 }
