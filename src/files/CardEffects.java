@@ -18,5 +18,10 @@ public interface CardEffects {
 	 * Gets a card's type.
 	 * @return The card's type.
 	 */
-	String getCardType();
+	CardTypes getCardType();
+	/**
+	 * Sets a card type.
+	 * @param t Card type to set.
+	 */
+	void setCardType(CardTypes t);
 }

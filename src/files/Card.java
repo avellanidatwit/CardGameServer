@@ -3,12 +3,26 @@ package files;
  * A class to make a card, for use in the game.
  * @author evelyn
  */
-public abstract class Card {
+public abstract class Card implements CardEffects {
 	final protected String NAME;
 	final protected String DESCRIPTION;
 	protected CardLevel level;
+	protected CardTypes type;
 	/**
-	 * 3-arg constructor.
+	 * 4-arg constructor.
+	 * @param name Name of card.
+	 * @param description Description of card.
+	 * @param level Level of card.
+	 * @param type Type of card.
+	 */
+	public Card(String name, String description, CardLevel level, CardTypes type) {
+		this.NAME = name;
+		this.DESCRIPTION = description;
+		this.level = level;
+		this.type = type;
+	}
+	/**
+	 * 3-arg constructor Type 1.
 	 * @param name Name of card.
 	 * @param description Description of card.
 	 * @param level Current level of card.
@@ -17,6 +31,19 @@ public abstract class Card {
 		this.NAME = name;
 		this.DESCRIPTION = description;
 		this.level = level;
+		this.type = CardTypes.NULL;
+	}
+	/**
+	 * 3-arg constructor Type 2.
+	 * @param name Name of card.
+	 * @param description Description of card.
+	 * @param type Type of card.
+	 */
+	public Card(String name, String description, CardTypes type) {
+		this.NAME = name;
+		this.DESCRIPTION = description;
+		this.level = CardLevel.LV0;
+		this.type = type;
 	}
 	/**
 	 * 2-arg constructor.
@@ -26,7 +53,8 @@ public abstract class Card {
 	public Card(String name, String description) {
 		this.NAME = name;
 		this.DESCRIPTION = description;
-		level = CardLevel.LV0;
+		this.level = CardLevel.LV0;
+		this.type = CardTypes.NULL;
 	}
 	/**
 	 * No-arg constructor (mostly unused)
@@ -34,7 +62,8 @@ public abstract class Card {
 	public Card() {
 		this.NAME = null;
 		this.DESCRIPTION = null;
-		level = CardLevel.LV0;
+		this.level = CardLevel.LV0;
+		this.type = CardTypes.NULL;
 	}
 	/**
 	 * Gets the name of the card.

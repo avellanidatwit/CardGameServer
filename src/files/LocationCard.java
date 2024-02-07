@@ -9,7 +9,7 @@ public class LocationCard extends Card {
 	 * No arg constructor.
 	 */
 	public LocationCard() {
-		super(null, null);
+		super();
 		this.locationName = null;
 	}
 	/**
@@ -18,7 +18,7 @@ public class LocationCard extends Card {
 	 * @param description Description of the card.
 	 */
 	public LocationCard(String name, String description) {
-		super(name, description);
+		super(name, description, CardLevel.LVLOC, CardTypes.LOCATION);
 		this.locationName = null;
 	}
 	/**
@@ -28,7 +28,7 @@ public class LocationCard extends Card {
 	 * @param locationName Location as described on the card.
 	 */
 	public LocationCard(String name, String description, String locationName) {
-		super(name, description);
+		super(name, description, CardLevel.LVLOC, CardTypes.LOCATION);
 		this.locationName = locationName;
 	}
 	/**
@@ -49,8 +49,9 @@ public class LocationCard extends Card {
 	 * Gets the card type
 	 * @return A string, set to location (Location card type never changes.)
 	 */
-	public String getCardType() {
-		return "Location";
+	@Override
+	public CardTypes getCardType() {
+		return CardTypes.LOCATION;
 	}
 	
 	@Override
@@ -67,5 +68,20 @@ public class LocationCard extends Card {
 			}
 		}
 		return false;
+	}
+	@Override
+	public String getEffects() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void setEffects(Card e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void setCardType(CardTypes t) {
+		this.type = t;
+		
 	}
 }
