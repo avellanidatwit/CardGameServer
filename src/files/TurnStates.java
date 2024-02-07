@@ -1,0 +1,12 @@
+package files;
+
+public enum TurnStates {
+	USER1PLAY,
+	USER2PLAY,
+	GETEFFECTS,
+	TRIGGEREFFECTS,
+	SYNCDECK,
+	CHECKWINCONDITIONS,
+	RESET
+	
+}
