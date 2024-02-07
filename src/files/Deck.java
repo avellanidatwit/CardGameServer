@@ -64,6 +64,13 @@ public class Deck {
 		this.cards.remove(c);
 	}
 	/**
+	 * Sets cards in the deck
+	 * @param c New deck to set.
+	 */
+	public void setCards(ArrayList<Card> c) {
+		this.cards = c;
+	}
+	/**
 	 * Shuffles the deck.
 	 */
 	public void shuffleDeck() {

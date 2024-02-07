@@ -6,20 +6,20 @@ package files;
 public class User {
 	
 	protected UserHand hand;
-	final protected String username;
+	final protected String USERNAME;
 	/**
 	 * 1-arg Constructor
 	 * @param username A user's username.
 	 */
 	public User(String username) {
-		this.username = username;
+		this.USERNAME = username;
 	}
 	/**
 	 * Returns the user's username.
 	 * @return The user's username.
 	 */
 	public String getUsername() {
-		return this.username;
+		return this.USERNAME;
 	}
 	/**
 	 * Returns the user's hand.
@@ -30,13 +30,13 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		return "Username: " + this.username + "\nCurrent Hand: " + this.hand;
+		return "Username: " + this.USERNAME + "\nCurrent Hand: " + this.hand;
 	}
 	@Override
 	public boolean equals(Object o) {
 		if(o instanceof User) {
 			User temp = (User) o;
-			if(this.username.equals(temp.getUsername())) {
+			if(this.USERNAME.equals(temp.getUsername())) {
 				return true;
 			}
 		}

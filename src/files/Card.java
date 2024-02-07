@@ -4,48 +4,48 @@ package files;
  * @author evelyn
  */
 public class Card {
-	final protected String name;
-	final protected String description;
+	final protected String NAME;
+	final protected String DESCRIPTION;
 	/**
 	 * 2-arg constructor.
 	 * @param name Name of card.
 	 * @param description Description of card.
 	 */
 	public Card(String name, String description) {
-		this.name = name;
-		this.description = description;
+		this.NAME = name;
+		this.DESCRIPTION = description;
 	}
 	/**
 	 * No-arg constructor (mostly unused)
 	 */
 	public Card() {
-		this.name = null;
-		this.description = null;
+		this.NAME = null;
+		this.DESCRIPTION = null;
 	}
 	/**
 	 * Gets the name of the card.
 	 * @return Name of the card.
 	 */
 	public String getName() {
-		return this.name;
+		return this.NAME;
 	}
 	/**
 	 * Gets the description of the card.
 	 * @return Description of the card.
 	 */
 	public String getDescription() {
-		return this.description;
+		return this.DESCRIPTION;
 	}
 	
 	@Override
 	public String toString() {
-		return "Name: " + this.name + "\nDescription: " + this.description;
+		return "Name: " + this.NAME + "\nDescription: " + this.DESCRIPTION;
 	}
 	@Override
 	public boolean equals(Object o) {
 		if(o instanceof Card) {
 			Card temp = (Card) o;
-			if(temp.getName().equals(this.name) && temp.getDescription().equals(this.description)) {
+			if(temp.getName().equals(this.NAME) && temp.getDescription().equals(this.DESCRIPTION)) {
 				return true;
 			}
 			

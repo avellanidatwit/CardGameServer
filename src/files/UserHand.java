@@ -6,32 +6,32 @@ package files;
  */
 public class UserHand extends Deck {
 	
-	final protected String handOwner;
+	final protected String HANDOWNER;
 	/**
 	 * 1 arg constructor.
-	 * @param handOwner owner of the hand (user's name)
+	 * @param HANDOWNER owner of the hand (user's name)
 	 */
-	public UserHand(String handOwner) {
-		this.handOwner = handOwner;
+	public UserHand(String HANDOWNER) {
+		this.HANDOWNER = HANDOWNER;
 	}
 	/**
 	 * Gets the hand owner's name.
 	 * @return The hand owner's name.
 	 */
 	public String getHandOwner() {
-		return this.handOwner;
+		return this.HANDOWNER;
 	}
 	
 	@Override
 	public String toString() {
-		return "Number of Cards: " + super.numberOfCards + "\nCards: " + super.cards + "\nHand Owner: " + this.handOwner;
+		return "Number of Cards: " + super.numberOfCards + "\nCards: " + super.cards + "\nHand Owner: " + this.HANDOWNER;
 	}
 	
 	@Override
 	public boolean equals(Object o) {
 		if(o instanceof UserHand) {
 			UserHand temp = (UserHand) o;
-			if(temp.getHandOwner().equals(this.handOwner) && this.cards == temp.getCards() && this.numberOfCards == temp.getNumberOfCards()) {
+			if(temp.getHandOwner().equals(this.HANDOWNER) && this.cards == temp.getCards() && this.numberOfCards == temp.getNumberOfCards()) {
 				return true;
 			}
 		}
