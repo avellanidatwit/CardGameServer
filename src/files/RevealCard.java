@@ -98,7 +98,7 @@ public final class RevealCard extends Card implements CardEffects {
 	public Card[] trigger(UserHand h) {
 		return (Card[]) h.getCards().toArray();
 	}
-	
+	 
 	public void trigger(Deck d, UserHand h) {
 		Card[] cards = cardFinder(5, d);
 		//TODO: add user integration to actually getting the cards.
