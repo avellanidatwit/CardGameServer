@@ -1,9 +1,9 @@
 package files;
 /**
- * Methods to control JavaFX.
+ * methods to control javafx
  * 
  * @author dominic
  */
-public abstract class VFXMethods {
-
+public interface VFXMethods {
+	
 }

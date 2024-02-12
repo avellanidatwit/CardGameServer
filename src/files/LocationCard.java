@@ -3,7 +3,7 @@ package files;
  * Card that establishes a location.
  * @author evelyn
  */
-public class LocationCard extends Card {
+public final class LocationCard extends Card {
 	protected String locationName;
 	/**
 	 * No arg constructor.

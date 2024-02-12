@@ -1,8 +1,11 @@
 package files;
 /**
- * Types of possible cards.
+ * Types of possible cards, also helps to set the effect types.
  */
 public enum CardTypes {
 	NULL,
-	LOCATION
+	LOCATION,
+	REMOVER,
+	UPGRADER,
+	REVEALER,
 }

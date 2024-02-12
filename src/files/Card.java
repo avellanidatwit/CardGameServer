@@ -93,6 +93,12 @@ public abstract class Card implements CardEffects {
 	public void setCardLevel(CardLevel l) {
 		this.level = l;
 	}
+	/**
+	 * Triggers a card's effects. This method is not to be called, and should later be implemented to throw an error that is handled appropriately as such.
+	 */
+	public void trigger() {
+		System.out.println("Unimplemented Superclass Method");
+	}
 	
 	@Override
 	public String toString() {

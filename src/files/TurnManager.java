@@ -12,7 +12,7 @@ import java.net.UnknownHostException;
 /**
  * Manages the player's turns, and game as a whole.
  */
-public abstract class TurnManager extends VFXMethods {
+public abstract class TurnManager extends GUIController implements VFXMethods {
 	private final ServerSocket SERVER;
 	protected final int PORT;
 	protected TurnStates currentPhase;

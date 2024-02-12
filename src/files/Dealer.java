@@ -6,7 +6,7 @@ import java.util.Collections;
  * Class that implements the dealer, and utilizes it to deal cards/trigger effects/manage turns.
  * @author evelyn
  */
-public class Dealer extends TurnManager implements DealerControls {
+public final class Dealer extends TurnManager implements DealerControls {
 	
 	protected Deck mainDeck;
 	/**
