@@ -3,7 +3,7 @@ package files;
  * Controls for the dealer object
  * @author evelyn
  */
-public interface DealerControls {
+public sealed interface DealerControls permits Dealer {
 	/**
 	 * Triggers the effects on the other users/cards on the field.
 	 */

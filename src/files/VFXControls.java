@@ -4,6 +4,6 @@ package files;
  * 
  * @author dominic
  */
-public interface VFXMethods {
+public sealed interface VFXControls permits GUIController {
 	
 }

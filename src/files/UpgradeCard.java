@@ -25,29 +25,41 @@ public final class UpgradeCard extends Card implements CardEffects {
 	 * Triggers a card's effects.
 	 */
 	public void trigger() {
-		
+		System.out.printf("Please give a card to upgrade in the prompt.");
 	}
-	@Override
-	public String getEffects() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setEffects(Card e) {
-		// TODO Auto-generated method stub
-
+	/**
+	 * Upgrades another card, via the trigger function.
+	 * @param c Card to upgrade.
+	 */
+	public void trigger(Card c) {
+		if(c.getCardLevel().equals(CardLevel.LV0)) {
+			c.setCardLevel(CardLevel.LV1);
+		}
+		else if(c.getCardLevel().equals(CardLevel.LV1)) {
+			c.setCardLevel(CardLevel.LV2);
+		}
+		else if(c.getCardLevel().equals(CardLevel.LV2)) {
+			c.setCardLevel(CardLevel.LV3);
+		}
+		else if(c.getCardLevel().equals(CardLevel.LV3)) {
+			c.setCardLevel(CardLevel.LV4);
+		}
+		else if(c.getCardLevel().equals(CardLevel.LV4)) {
+			c.setCardLevel(CardLevel.LV5);
+		}
+		else {
+			System.out.printf("Card cannot be upgraded.");
+		}
 	}
 
 	@Override
 	public CardTypes getCardType() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.type;
 	}
 
 	@Override
 	public void setCardType(CardTypes t) {
-		// TODO Auto-generated method stub
+		this.type = t;
 
 	}
 

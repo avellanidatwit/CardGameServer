@@ -1,5 +1,5 @@
 package files;
 
-public abstract class GUIController implements VFXMethods {
+public abstract sealed class GUIController implements VFXControls permits TurnManager {
 
 }

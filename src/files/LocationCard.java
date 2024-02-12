@@ -70,18 +70,13 @@ public final class LocationCard extends Card {
 		return false;
 	}
 	@Override
-	public String getEffects() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public void setEffects(Card e) {
-		// TODO Auto-generated method stub
+	public void setCardType(CardTypes t) {
+		this.type = t;
 		
 	}
 	@Override
-	public void setCardType(CardTypes t) {
-		this.type = t;
+	public void trigger(Card c) {
+		// TODO Auto-generated method stub
 		
 	}
 }

@@ -19,19 +19,9 @@ public final class RemovalCard extends Card implements CardEffects {
 	/**
 	 * Triggers a card's effects.
 	 */
+	@Override
 	public void trigger() {
 		
-	}
-	@Override
-	public String getEffects() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setEffects(Card e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -44,6 +34,11 @@ public final class RemovalCard extends Card implements CardEffects {
 	public void setCardType(CardTypes t) {
 		// TODO Auto-generated method stub
 
+	}
+	@Override
+	public void trigger(Card c) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
