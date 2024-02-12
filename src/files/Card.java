@@ -3,7 +3,7 @@ package files;
  * A class to make a card, for use in the game.
  * @author evelyn
  */
-public abstract class Card implements CardEffects {
+public abstract sealed class Card implements CardEffects permits LocationCard, RemovalCard, RevealCard, UpgradeCard {
 	final protected String NAME;
 	final protected String DESCRIPTION;
 	protected CardLevel level;

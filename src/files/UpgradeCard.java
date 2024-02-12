@@ -3,7 +3,7 @@ package files;
  * Upgrades another card.
  * @author evelyn
  */
-public class UpgradeCard extends Card implements CardEffects {
+public final class UpgradeCard extends Card implements CardEffects {
 	/**
 	 * 3 arg constructor
 	 * @param NAME Name of card.

@@ -12,7 +12,8 @@ import java.util.Scanner;
  * @author dominic
  *
  */
-public class JavaClient {
+// TODO: restructure this class into an actual client instead of an example case.
+public abstract sealed class JavaClient permits User {
 
     public static void main(String[] args) throws UnknownHostException, IOException, ClassNotFoundException, InterruptedException{
         //get the localhost IP address, if the server is running on some other IP, you need to use that

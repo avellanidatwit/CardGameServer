@@ -3,7 +3,7 @@ package files;
  * Card that reveals cards in deck/other player's hand.
  * @author evelyn
  */
-public class RevealCard extends Card implements CardEffects {
+public final class RevealCard extends Card implements CardEffects {
 	/**
 	 * 3 arg constructor.
 	 * @param NAME Name of card.

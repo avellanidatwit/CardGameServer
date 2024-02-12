@@ -3,7 +3,7 @@ package files;
  * Card type that removes cards, in a generic fashion, implemented to possible remove from deck, or user.
  * @author evelyn
  */
-public class RemovalCard extends Card implements CardEffects {
+public final class RemovalCard extends Card implements CardEffects {
 	
 	public RemovalCard(String NAME, String DESCRIPTION, CardLevel level) {
 		super(NAME, DESCRIPTION, level, CardTypes.REMOVER);

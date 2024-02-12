@@ -3,7 +3,7 @@ package files;
  * Class to establish a user's identity & hand.
  * @author evelyn
  */
-public class User {
+public final class User extends JavaClient {
 	
 	protected UserHand hand;
 	final protected String USERNAME;
