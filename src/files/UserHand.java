@@ -4,7 +4,7 @@ package files;
  * 
  * @author evelyn
  */
-public class UserHand extends Deck {
+public final class UserHand extends Deck {
 	
 	final protected String HANDOWNER;
 	/**

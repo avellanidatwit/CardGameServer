@@ -6,7 +6,7 @@ import java.util.Collections;
  * Class that establishes a deck, for use in the user hand and the overall deck of cards that will be drawn from.
  * @author evelyn
  */
-public class Deck {
+sealed class Deck permits UserHand {
 	protected int numberOfCards;
 	protected ArrayList<Card> cards;
 	

@@ -3,7 +3,7 @@ package files;
  * A class to make a card, for use in the game.
  * @author evelyn
  */
-public abstract class Card implements CardEffects {
+public abstract sealed class Card implements CardEffects permits LocationCard, RemovalCard, RevealCard, UpgradeCard {
 	final protected String NAME;
 	final protected String DESCRIPTION;
 	protected CardLevel level;
@@ -92,6 +92,12 @@ public abstract class Card implements CardEffects {
 	 */
 	public void setCardLevel(CardLevel l) {
 		this.level = l;
+	}
+	/**
+	 * Triggers a card's effects. This method is not to be called, and should later be implemented to throw an error that is handled appropriately as such.
+	 */
+	public void trigger() {
+		System.out.println("Unimplemented Superclass Method");
 	}
 	
 	@Override

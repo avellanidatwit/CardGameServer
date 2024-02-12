@@ -2,7 +2,7 @@ package files;
 /**
  * Methods to control JavaFX.
  * 
- * @author Dominic Avellani
+ * @author Dominic
  */
 public abstract class VFXMethods {
 
