@@ -23,6 +23,14 @@ public final class RemovalCard extends Card implements CardEffects {
 	public void trigger() {
 		
 	}
+	/**
+	 * Triggers a card's effects on another card.
+	 * @param c Card to trigger against.
+	 */
+	@Override
+	public void trigger(Card c) {
+		
+	}
 
 	@Override
 	public CardTypes getCardType() {
@@ -34,11 +42,6 @@ public final class RemovalCard extends Card implements CardEffects {
 	public void setCardType(CardTypes t) {
 		// TODO Auto-generated method stub
 
-	}
-	@Override
-	public void trigger(Card c) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
