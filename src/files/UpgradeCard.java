@@ -10,16 +10,16 @@ public final class UpgradeCard extends Card implements CardEffects {
 	 * @param DESCRIPTION Description of card.
 	 * @param level Level of card.
 	 */
-	public UpgradeCard(String NAME, String DESCRIPTION, CardLevel level) {
-		super(NAME, DESCRIPTION, level, CardTypes.UPGRADER);
+	public UpgradeCard(String NAME, String DESCRIPTION, boolean usability, CardLevel level) {
+		super(NAME, DESCRIPTION, usability, level, CardTypes.UPGRADER);
 	}
 	/**
 	 * 2 arg constructor
 	 * @param NAME Name of card.
 	 * @param DESCRIPTION Description of card.
 	 */
-	public UpgradeCard(String NAME, String DESCRIPTION) {
-		super(NAME, DESCRIPTION, CardLevel.LV0, CardTypes.UPGRADER);
+	public UpgradeCard(String NAME, String DESCRIPTION, boolean usability) {
+		super(NAME, DESCRIPTION, usability, CardLevel.LV0, CardTypes.UPGRADER);
 	}
 	/**
 	 * Triggers a card's effects.
