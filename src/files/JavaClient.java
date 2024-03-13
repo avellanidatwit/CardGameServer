@@ -1,56 +1,40 @@
 package files;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.net.UnknownHostException;
-import java.util.Scanner;
+
+import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryonet.Client;
+import com.esotericsoftware.kryonet.Connection;
+import com.esotericsoftware.kryonet.Listener;
 
 /**
  * This class implements the java socket client
- * @author dominic
+ * @author Dominic Avellani
  *
  */
 // TODO: restructure this class into an actual client instead of an example case.
 public abstract sealed class JavaClient permits User {
 
-    public static void main(String[] args) throws UnknownHostException, IOException, ClassNotFoundException, InterruptedException{
-        //get the localhost IP address, if the server is running on some other IP, you need to use that
-        InetAddress host = InetAddress.getLocalHost();
-        Socket socket = null;
-        ObjectOutputStream oos = null;
-        ObjectInputStream ois = null;
+    public static void main(String[] args) throws IOException{
+    	
+    	Client client = new Client();
+    	Kryo kryo = client.getKryo();
+        kryo.register(SomeRequest.class);
+        kryo.register(SomeResponse.class);
+    	
+    	client.addListener(new Listener() {
+    	       public void received (Connection connection, Object object) {
+    	          if (object instanceof SomeResponse) {
+    	             SomeResponse response = (SomeResponse)object;
+    	             System.out.println(response.text);
+    	          }
+    	       }
+    	    });
+    	
+        client.start();
+        client.connect(5000, "127.0.0.1", 54555, 54777);
         
-        while(true){
-            //establish a socket connection to the server
-            socket = new Socket(host.getHostName(), 3333);
-            oos = new ObjectOutputStream(socket.getOutputStream());
-            ois = new ObjectInputStream(socket.getInputStream());
-            
-            Scanner scanner = new Scanner(System.in);
-            String message, response;
-            
-            while (true) {
-	            System.out.print("Input message: ");
-	            message = scanner.nextLine();
-	            
-	            System.out.println("Sending request to Socket Server");
-	            oos.writeObject(message);
-	            
-	            //read the server response message
-	            
-	            response = (String) ois.readObject();
-	            System.out.println(response);
-	            
-	            //close resources
-	            if(message.equals("exit")) {
-	            	ois.close();
-	                oos.close();
-	            	break;}
-        	}
-            if(message.equals("exit")) {
-            	break;}
-    	}
+        SomeRequest request = new SomeRequest();
+        request.text = "Here is the request";
+        client.sendTCP(request);
     }
 }
