@@ -7,6 +7,7 @@ public final class User extends JavaClient {
 	
 	protected UserHand hand;
 	final protected String USERNAME;
+	protected Deck pile;
 	protected int id;
 	/**
 	 * 1-arg Constructor
