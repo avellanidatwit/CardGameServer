@@ -5,7 +5,7 @@ package files;
  */
 public final class User extends JavaClient {
 	
-	protected UserHand hand;
+	protected Deck hand;
 	final protected String USERNAME;
 	protected Deck pile;
 	protected int id;
@@ -28,7 +28,7 @@ public final class User extends JavaClient {
 	 * @param username A user's username.
 	 * @param h The hand to set under the given user object.
 	 */
-	public User(String username, UserHand h) {
+	public User(String username, Deck h) {
 		if(id == 0) {
 			this.id = 0;
 		}
@@ -50,7 +50,7 @@ public final class User extends JavaClient {
 	 * Returns the user's hand.
 	 * @return The user's hand.
 	 */
-	public UserHand getUserHand() {
+	public Deck getUserHand() {
 		return this.hand;
 	}
 	@Override

@@ -52,7 +52,7 @@ public final class RevealCard extends Card implements CardEffects {
 	 * @param c Card to find.
 	 * @param h Hand to look in.
 	 */
-	public String trigger(Card c, UserHand h) {
+	public String trigger(Card c, Deck h) {
 		for(Card current : h.getCards()) {
 			if(current.equals(c)) {
 				return "Card Found.";
@@ -66,18 +66,6 @@ public final class RevealCard extends Card implements CardEffects {
 	 * @param h Hand to pull from.
 	 * @return Returns the cards assigned by the randomizer, and the total is equivalent to number of cards.
 	 */
-	public Card[] cardFinder(int noOfCards, UserHand h) {
-		Random randomFinder = new Random((long) Math.log(h.getNumberOfCards()));
-		Card[] cardRetVal = new Card[noOfCards];
-		int[] randomValues = new int[noOfCards];
-		for(int i = 0; i < randomValues.length; i++) {
-			randomValues[i] = randomFinder.nextInt();
-		}
-		for(int i = 0; i < cardRetVal.length; i++) {
-			cardRetVal[i] = h.getCards().get(randomValues[i]);
-		}
-		return cardRetVal;
-	}
 	private Card[] cardFinder(int noOfCards, Deck d) {
 		Random randomFinder = new Random((long) Math.log(d.getNumberOfCards()));
 		Card[] cardRetVal = new Card[noOfCards];
@@ -95,11 +83,11 @@ public final class RevealCard extends Card implements CardEffects {
 	 * @param h Hand to pull from.
 	 * @return The hand.
 	 */
-	public Card[] trigger(UserHand h) {
+	public Card[] trigger(Deck h) {
 		return (Card[]) h.getCards().toArray();
 	}
 	 
-	public void trigger(Deck d, UserHand h) {
+	public void trigger(Deck d, Deck h) {
 		Card[] cards = cardFinder(5, d);
 		//TODO: add user integration to actually getting the cards.
 		for(Card c : cards) {
