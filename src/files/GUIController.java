@@ -1,5 +1,5 @@
 package files;
 
-public final class GUIController implements VFXControls {
+public final class GUIController {
 
 }

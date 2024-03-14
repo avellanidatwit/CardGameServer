@@ -8,6 +8,8 @@ public final class User extends JavaClient {
 	protected Deck hand;
 	final protected String USERNAME;
 	protected Deck pile;
+	protected TrashDiscard trash;
+	protected TrashDiscard discard;
 	protected int id;
 	/**
 	 * 1-arg Constructor
@@ -22,6 +24,10 @@ public final class User extends JavaClient {
 			id++;
 		}
 		this.USERNAME = username;
+		this.hand = null;
+		this.pile = null;
+		this.trash = null;
+		this.discard = null;
 	}
 	/**
 	 * 2 arg constructor
@@ -38,6 +44,22 @@ public final class User extends JavaClient {
 		}
 		this.USERNAME = username;
 		this.hand = h;
+		this.pile = null;
+		this.trash = null;
+		this.discard = null;
+	}
+	public User(String username, Deck h, TrashDiscard t, TrashDiscard d) {
+		if(id == 0) {
+			this.id = 0;
+		}
+		else {
+			this.id = id++;
+			id++;
+		}
+		this.USERNAME = username;
+		this.hand = h;
+		this.trash = t;
+		this.discard = d;
 	}
 	/**
 	 * Returns the user's username.
@@ -56,6 +78,32 @@ public final class User extends JavaClient {
 	@Override
 	public String toString() {
 		return "Username: " + this.USERNAME + "\nCurrent Hand: " + this.hand;
+	}
+	/**
+	 * Method to set the discard/trash items.
+	 * @param s item to set.
+	 * @param switcher if true, set trash, if false, set discard.
+	 */
+	public void setDiscardTrash(TrashDiscard s, boolean switcher) {
+		if(switcher) {
+			this.trash = s;
+		}
+		else {
+			this.discard = s;
+		}
+	}
+	/**
+	 * Method to get the discard/trash
+	 * @param switcher if true, get trash, if false, get discard.
+	 * @return Returned trash/discard.
+	 */
+	public TrashDiscard getDiscardTrash(boolean switcher) {
+		if(switcher) {
+			return this.trash;
+		}
+		else {
+			return this.discard;
+		}
 	}
 	@Override
 	public boolean equals(Object o) {
