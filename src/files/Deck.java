@@ -22,7 +22,7 @@ public sealed class Deck permits TrashDiscard {
 	}
 	/**
 	 * Gets number of cards.
-	 * @return
+	 * @return Returns the number of cards
 	 */
 	public int getNumberOfCards() {
 		return this.numberOfCards;

@@ -30,18 +30,6 @@ public final class RevealCard extends Card implements CardEffects {
 	public void trigger() {
 		
 	}
-
-	@Override
-	public CardTypes getCardType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setCardType(CardTypes t) {
-		// TODO Auto-generated method stub
-
-	}
 	@Override
 	public void trigger(Card c) {
 		// TODO Auto-generated method stub

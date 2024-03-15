@@ -70,11 +70,6 @@ public final class LocationCard extends Card {
 		return false;
 	}
 	@Override
-	public void setCardType(CardTypes t) {
-		this.type = t;
-		
-	}
-	@Override
 	public void trigger(Card c) {
 		// TODO Auto-generated method stub
 		

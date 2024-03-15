@@ -19,4 +19,14 @@ public sealed interface CardEffects permits Card, RemovalCard, RevealCard, Upgra
 	 * @param c
 	 */
 	void trigger(Card c);
+	/**
+	 * Returns a card's level.
+	 * @return
+	 */
+	CardLevel getCardLevel();
+	/**
+	 * Sets a card's level.
+	 * @param l Level to set.
+	 */
+	void setCardLevel(CardLevel l);
 }

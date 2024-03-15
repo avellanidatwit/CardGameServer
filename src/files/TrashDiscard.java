@@ -46,5 +46,16 @@ public final class TrashDiscard extends Deck {
 	public boolean getIsTrash() {
 		return this.isTrash;
 	}
+	/**
+	 * Method that moves the discard/trash to the draw pile.
+	 * @param d
+	 */
+	public void moveToPile(Deck d) {
+		d.setNumberOfCards(this.numberOfCards);
+		this.numberOfCards = 0;
+		Deck temp = new Deck(this.numberOfCards, this.cards);
+		this.cards.clear();
+		d = temp;
+	}
 
 }

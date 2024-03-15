@@ -92,6 +92,7 @@ public abstract sealed class Card implements CardEffects permits LocationCard, R
 	 * Gets the card level.
 	 * @return The card's current level.
 	 */
+	@Override
 	public CardLevel getCardLevel() {
 		return this.level;
 	}
@@ -99,8 +100,23 @@ public abstract sealed class Card implements CardEffects permits LocationCard, R
 	 * Sets the card level.
 	 * @param l Level to set.
 	 */
+	@Override
 	public void setCardLevel(CardLevel l) {
 		this.level = l;
+	}
+	/**
+	 * Returns the card's type.
+	 * @return Value to return.
+	 */
+	public CardTypes getCardType() {
+		return this.type;
+	}
+	/**
+	 * Sets a card's type.
+	 * @param t Type to set.
+	 */
+	public void setCardType(CardTypes t) {
+		this.type = t;
 	}
 	/**
 	 * Gets whether or not a card is usable.
@@ -118,8 +134,9 @@ public abstract sealed class Card implements CardEffects permits LocationCard, R
 	}
 	/**
 	 * Triggers a card's effects. This method is not to be called, and should later be implemented to throw an error that is handled appropriately as such.
+	 * @throws Exception 
 	 */
-	public void trigger() {
+	public void trigger() throws Exception {
 		System.out.println("Unimplemented Superclass Method");
 	}
 	

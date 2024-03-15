@@ -1,6 +1,6 @@
 package files;
 /**
- * Class to establish a user's identity & hand.
+ * Class to establish a user's identity and hand.
  * @author evelyn
  */
 public final class User extends JavaClient {

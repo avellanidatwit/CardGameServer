@@ -32,16 +32,4 @@ public final class RemovalCard extends Card implements CardEffects {
 		
 	}
 
-	@Override
-	public CardTypes getCardType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setCardType(CardTypes t) {
-		// TODO Auto-generated method stub
-
-	}
-
 }
