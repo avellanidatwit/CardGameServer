@@ -16,7 +16,7 @@ import com.esotericsoftware.kryonet.Server;
 
 public class JavaServer {    
     
-    public static void main(String args[]) throws IOException{
+    public static void main(String args[]) throws IOException {
     	
     	Server server = new Server();
     	Kryo kryo = server.getKryo();
