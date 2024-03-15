@@ -136,7 +136,7 @@ public abstract sealed class Card implements CardEffects permits LocationCard, R
 	 * Triggers a card's effects. This method is not to be called, and should later be implemented to throw an error that is handled appropriately as such.
 	 * @throws Exception 
 	 */
-	public void trigger() throws Exception {
+	public void trigger() {
 		System.out.println("Unimplemented Superclass Method");
 	}
 	
