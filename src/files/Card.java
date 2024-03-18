@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
  * A class to make a card, for use in the game.
  * @author evelyn
  */
-public abstract sealed class Card implements CardEffects permits LocationCard, RemovalCard, RevealCard, UpgradeCard {
+public final class Card implements CardEffects {
 	final protected String NAME;
 	final protected String DESCRIPTION;
 	final protected Image IMAGE;
@@ -47,7 +47,7 @@ public abstract sealed class Card implements CardEffects permits LocationCard, R
 		this.NAME = null;
 		this.DESCRIPTION = null;
 		this.IMAGE = null;
-		this.level = CardLevel.LV0;
+		this.level = CardLevel.LV0Card;
 		this.type = CardTypes.NULL;
 	}
 	/**
@@ -102,5 +102,20 @@ public abstract sealed class Card implements CardEffects permits LocationCard, R
 			
 		}
 		return false;
+	}
+	@Override
+	public CardTypes getCardType() {
+		// TODO Auto-generated method stub
+		return this.getCardType();
+	}
+	@Override
+	public void setCardType(CardTypes t) {
+		this.type = t;
+		
+	}
+	@Override
+	public void trigger(Card c) {
+		// TODO Auto-generated method stub
+		
 	}
 }

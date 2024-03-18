@@ -3,7 +3,7 @@ package files;
  * Interface for the sole purpose of setting up cards, which each card type will be defined in its own class, therefore implementing this interface.
  * @author evelyn
  */
-public sealed interface CardEffects permits Card, RemovalCard, RevealCard, UpgradeCard {
+public sealed interface CardEffects permits Card {
 	CardTypes getCardType();
 	/**
 	 * Sets a card type.
