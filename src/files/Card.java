@@ -1,4 +1,7 @@
 package files;
+
+import javafx.scene.image.Image;
+
 /**
  * A class to make a card, for use in the game.
  * @author evelyn
@@ -6,6 +9,8 @@ package files;
 public abstract sealed class Card implements CardEffects permits LocationCard, RemovalCard, RevealCard, UpgradeCard {
 	final protected String NAME;
 	final protected String DESCRIPTION;
+	final protected Image IMAGE;
+	protected int uses, maxUses;
 	protected CardLevel level;
 	protected CardTypes type;
 	/**
@@ -15,9 +20,10 @@ public abstract sealed class Card implements CardEffects permits LocationCard, R
 	 * @param level Level of card.
 	 * @param type Type of card.
 	 */
-	public Card(String name, String description, CardLevel level, CardTypes type) {
+	public Card(String name, String description, Image image, CardLevel level, CardTypes type) {
 		this.NAME = name;
 		this.DESCRIPTION = description;
+		this.IMAGE = image;
 		this.level = level;
 		this.type = type;
 	}
@@ -27,33 +33,11 @@ public abstract sealed class Card implements CardEffects permits LocationCard, R
 	 * @param description Description of card.
 	 * @param level Current level of card.
 	 */
-	public Card(String name, String description, CardLevel level) {
+	public Card(String name, String description, Image image, CardLevel level) {
 		this.NAME = name;
 		this.DESCRIPTION = description;
+		this.IMAGE = image;
 		this.level = level;
-		this.type = CardTypes.NULL;
-	}
-	/**
-	 *3-arg constructor Type 2.
-	 * @param name Name of card.
-	 * @param description Description of card.
-	 * @param type Type of card.
-	 */
-	public Card(String name, String description, CardTypes type) {
-		this.NAME = name;
-		this.DESCRIPTION = description;
-		this.level = CardLevel.LV0;
-		this.type = type;
-	}
-	/**
-	 * 2-arg constructor.
-	 * @param name Name of card.
-	 * @param description Description of card.
-	 */
-	public Card(String name, String description) {
-		this.NAME = name;
-		this.DESCRIPTION = description;
-		this.level = CardLevel.LV0;
 		this.type = CardTypes.NULL;
 	}
 	/**
@@ -62,6 +46,7 @@ public abstract sealed class Card implements CardEffects permits LocationCard, R
 	public Card() {
 		this.NAME = null;
 		this.DESCRIPTION = null;
+		this.IMAGE = null;
 		this.level = CardLevel.LV0;
 		this.type = CardTypes.NULL;
 	}

@@ -1,5 +1,9 @@
 package files;
 
+import java.util.HashMap;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
@@ -18,8 +22,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
- * Methods to control JavaFX.
- * 
+ * Main Function
+ * Use fadetransition for text
  * @author Dominic Avellani
  */
 public class VFXMethods extends Application {
@@ -29,6 +33,41 @@ public class VFXMethods extends Application {
 	
 	public final int WINDOW_HEIGHT = 768;
 	public final int WINDOW_WIDTH = 1024;
+	
+	public static final String ERR_INPUT = "Invalid input. Please only input 1 letter, C or S.";
+	public static TurnStates turn = null;
+	
+	public User player = new User("Player 1");
+	
+	HashMap<String, Card> cardData = new HashMap<String, Card>(){{
+	    put("Stick", new Card());
+	}};
+
+	public static void main(String[] args) {
+		
+		
+		// Launches the GUI
+        Application.launch(args);
+        
+        // Server Setup
+//		Scanner input = new Scanner(System.in);
+//		System.out.printf("Are you opening a client, or a server? (C/S): ");
+//		try {
+//			char uInput = input.next().charAt(0);
+//			if(uInput == 'C') {
+//				//TODO: run client
+//			}
+//			else if(uInput == 'S'){
+//				//TODO: run server
+//			}
+//			else {
+//				System.out.printf(ERR_INPUT);
+//			}
+//		}
+//		catch (InputMismatchException e) {
+//			System.out.printf(ERR_INPUT);
+//		}
+	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -95,6 +134,8 @@ public class VFXMethods extends Application {
 	        
 	        if (dropPoint.getY() < 0 ) {
 	        	System.out.println("Use Card");
+	        	Card source = (Card)node.getUserData();
+	        	source.trigger();
 	        	container.getChildren().remove(node);
 	        }
 	        else {
