@@ -12,16 +12,16 @@ public final class RevealCard extends Card implements CardEffects {
 	 * @param DESCRIPTION Description of card.
 	 * @param level Level of card.
 	 */
-	public RevealCard(String NAME, String DESCRIPTION, boolean usability, CardLevel level) {
-		super(NAME, DESCRIPTION, usability, level, CardTypes.REVEALER);
+	public RevealCard(String NAME, String DESCRIPTION, CardLevel level) {
+		super(NAME, DESCRIPTION, level, CardTypes.REVEALER);
 	}
 	/**
 	 * 2 arg constructor.
 	 * @param NAME Name of card.
 	 * @param DESCRIPTION Description of card.
 	 */
-	public RevealCard(String NAME, String DESCRIPTION, boolean usability) {
-		super(NAME, DESCRIPTION, usability, CardLevel.LV0, CardTypes.REVEALER);
+	public RevealCard(String NAME, String DESCRIPTION) {
+		super(NAME, DESCRIPTION, CardLevel.LV0, CardTypes.REVEALER);
 	}
 	/**
 	 * Triggers a card's effects.
@@ -81,6 +81,16 @@ public final class RevealCard extends Card implements CardEffects {
 		for(Card c : cards) {
 			h.addCard(c);
 		}
+	}
+	@Override
+	public CardTypes getCardType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void setCardType(CardTypes t) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

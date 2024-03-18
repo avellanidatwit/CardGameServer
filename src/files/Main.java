@@ -1,4 +1,6 @@
 package files;
+
+import javafx.application.Application;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 /**
@@ -11,6 +13,10 @@ public class Main {
 	public static TurnStates turn = null;
 
 	public static void main(String[] args) {
+		// Launches the GUI
+        Application.launch(VFXMethods.class, args);
+        
+        // Server Setup
 		Scanner input = new Scanner(System.in);
 		System.out.printf("Are you opening a client, or a server? (C/S): ");
 		try {
@@ -28,9 +34,5 @@ public class Main {
 		catch (InputMismatchException e) {
 			System.out.printf(ERR_INPUT);
 		}
-		
-		
-
 	}
-
 }

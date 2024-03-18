@@ -17,8 +17,8 @@ public final class LocationCard extends Card {
 	 * @param name Name of the card.
 	 * @param description Description of the card.
 	 */
-	public LocationCard(String name, String description, boolean usability) {
-		super(name, description, usability, CardLevel.LVLOC, CardTypes.LOCATION);
+	public LocationCard(String name, String description) {
+		super(name, description, CardLevel.LVLOC, CardTypes.LOCATION);
 		this.locationName = null;
 	}
 	/**
@@ -27,8 +27,8 @@ public final class LocationCard extends Card {
 	 * @param description Description of the card.
 	 * @param locationName Location as described on the card.
 	 */
-	public LocationCard(String name, String description, boolean usability, String locationName) {
-		super(name, description, usability, CardLevel.LVLOC, CardTypes.LOCATION);
+	public LocationCard(String name, String description, String locationName) {
+		super(name, description, CardLevel.LVLOC, CardTypes.LOCATION);
 		this.locationName = locationName;
 	}
 	/**
@@ -71,6 +71,11 @@ public final class LocationCard extends Card {
 	}
 	@Override
 	public void trigger(Card c) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void setCardType(CardTypes t) {
 		// TODO Auto-generated method stub
 		
 	}

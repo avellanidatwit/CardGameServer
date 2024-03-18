@@ -8,59 +8,51 @@ public abstract sealed class Card implements CardEffects permits LocationCard, R
 	final protected String DESCRIPTION;
 	protected CardLevel level;
 	protected CardTypes type;
-	protected boolean usability;
 	/**
-	 * 5-arg constructor.
+	 * 4-arg constructor.
 	 * @param name Name of card.
 	 * @param description Description of card.
-	 * @param usability Whether or not card is usable at a current given moment.
 	 * @param level Level of card.
 	 * @param type Type of card.
 	 */
-	public Card(String name, String description, boolean usability, CardLevel level, CardTypes type) {
+	public Card(String name, String description, CardLevel level, CardTypes type) {
 		this.NAME = name;
 		this.DESCRIPTION = description;
-		this.usability = usability;
 		this.level = level;
 		this.type = type;
 	}
 	/**
-	 * 4-arg constructor Type 1.
+	 * 3-arg constructor Type 1.
 	 * @param name Name of card.
 	 * @param description Description of card.
-	 * @param usability Whether or not card is usable at a current given moment.
 	 * @param level Current level of card.
 	 */
-	public Card(String name, String description, boolean usability, CardLevel level) {
+	public Card(String name, String description, CardLevel level) {
 		this.NAME = name;
 		this.DESCRIPTION = description;
 		this.level = level;
 		this.type = CardTypes.NULL;
 	}
 	/**
-	 *4-arg constructor Type 2.
+	 *3-arg constructor Type 2.
 	 * @param name Name of card.
 	 * @param description Description of card.
-	 * @param usability Whether or not a card is usable at a current given moment.
 	 * @param type Type of card.
 	 */
-	public Card(String name, String description, boolean usability, CardTypes type) {
+	public Card(String name, String description, CardTypes type) {
 		this.NAME = name;
 		this.DESCRIPTION = description;
-		this.usability = usability;
 		this.level = CardLevel.LV0;
 		this.type = type;
 	}
 	/**
-	 * 3-arg constructor.
+	 * 2-arg constructor.
 	 * @param name Name of card.
 	 * @param description Description of card.
-	 * @param usability Whether or not a card is usable at a current given moment.
 	 */
-	public Card(String name, String description, boolean usability) {
+	public Card(String name, String description) {
 		this.NAME = name;
 		this.DESCRIPTION = description;
-		this.usability = usability;
 		this.level = CardLevel.LV0;
 		this.type = CardTypes.NULL;
 	}
@@ -70,7 +62,6 @@ public abstract sealed class Card implements CardEffects permits LocationCard, R
 	public Card() {
 		this.NAME = null;
 		this.DESCRIPTION = null;
-		this.usability = false;
 		this.level = CardLevel.LV0;
 		this.type = CardTypes.NULL;
 	}
@@ -103,34 +94,6 @@ public abstract sealed class Card implements CardEffects permits LocationCard, R
 	@Override
 	public void setCardLevel(CardLevel l) {
 		this.level = l;
-	}
-	/**
-	 * Returns the card's type.
-	 * @return Value to return.
-	 */
-	public CardTypes getCardType() {
-		return this.type;
-	}
-	/**
-	 * Sets a card's type.
-	 * @param t Type to set.
-	 */
-	public void setCardType(CardTypes t) {
-		this.type = t;
-	}
-	/**
-	 * Gets whether or not a card is usable.
-	 * @return Usability of card.
-	 */
-	public boolean getUsability() {
-		return this.usability;
-	}
-	/**
-	 * Sets a card's usability
-	 * @param u Usability boolean to set.
-	 */
-	public void setUsability(boolean u) {
-		this.usability = u;
 	}
 	/**
 	 * Triggers a card's effects. This method is not to be called, and should later be implemented to throw an error that is handled appropriately as such.

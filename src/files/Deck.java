@@ -7,17 +7,15 @@ import java.util.Collections;
  * @author evelyn
  */
 public sealed class Deck permits TrashDiscard {
-	protected int numberOfCards;
 	protected ArrayList<Card> cards;
 	
 	/**
 	 * No-arg constructor.
 	 */
 	public Deck() {
-		this.numberOfCards = 0;
+		this.cards = new ArrayList<Card>();
 	}
-	public Deck(int numberOfCards, ArrayList<Card> cards) {
-		this.numberOfCards = numberOfCards;
+	public Deck(ArrayList<Card> cards) {
 		this.cards = cards;
 	}
 	/**
@@ -25,26 +23,7 @@ public sealed class Deck permits TrashDiscard {
 	 * @return Returns the number of cards
 	 */
 	public int getNumberOfCards() {
-		return this.numberOfCards;
-	}
-	/**
-	 * Sets number of cards.
-	 * @param n Value to set.
-	 */
-	public void setNumberOfCards(int n) {
-		this.numberOfCards = n;
-	}
-	/**
-	 * Increases the number of cards by 1.
-	 */
-	public void incrementNumberOfCards() {
-		this.numberOfCards++;
-	}
-	/**
-	 * Decreases the number of cards by 1.
-	 */
-	public void decrementNumberOfCards() {
-		this.numberOfCards--;
+		return this.cards.size();
 	}
 	/**
 	 * Gets cards in the deck.
@@ -83,16 +62,16 @@ public sealed class Deck permits TrashDiscard {
 	
 	@Override
 	public String toString() {
-		return "Number of Cards: " + this.numberOfCards + "\nCards: " + this.cards;
+		return "Number of Cards: " + this.getNumberOfCards() + "\nCards: " + this.cards;
 	}
 	@Override
 	public boolean equals(Object o) {
 		if(o instanceof Deck) {
-			Deck temp = (Deck) o;
-			this.cards.sort(null);
-			temp.cards.sort(null);
-			if(this.cards.equals(temp.cards)) {
-				this.shuffleDeck();
+			Deck temp1 = this;
+			Deck temp2 = (Deck) o;
+			temp1.cards.sort(null);
+			temp2.cards.sort(null);
+			if(temp1.cards.equals(temp2.cards)) {
 				return true;
 			}
 		}

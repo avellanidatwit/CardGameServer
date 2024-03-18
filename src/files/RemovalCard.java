@@ -5,16 +5,16 @@ package files;
  */
 public final class RemovalCard extends Card implements CardEffects {
 	
-	public RemovalCard(String NAME, String DESCRIPTION, boolean usability, CardLevel level) {
-		super(NAME, DESCRIPTION, usability, level, CardTypes.REMOVER);
+	public RemovalCard(String NAME, String DESCRIPTION, CardLevel level) {
+		super(NAME, DESCRIPTION, level, CardTypes.REMOVER);
 	}
 	/**
 	 * 2 arg constructor.
 	 * @param NAME Name of card.
 	 * @param DESCRIPTION Description of card.
 	 */
-	public RemovalCard(String NAME, String DESCRIPTION, boolean usability) {
-		super(NAME, DESCRIPTION, usability, CardLevel.LV0, CardTypes.REMOVER);
+	public RemovalCard(String NAME, String DESCRIPTION) {
+		super(NAME, DESCRIPTION, CardLevel.LV0, CardTypes.REMOVER);
 	}
 	/**
 	 * Triggers a card's effects.
@@ -29,6 +29,16 @@ public final class RemovalCard extends Card implements CardEffects {
 	 */
 	@Override
 	public void trigger(Card c) {
+		
+	}
+	@Override
+	public CardTypes getCardType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void setCardType(CardTypes t) {
+		// TODO Auto-generated method stub
 		
 	}
 
