@@ -66,7 +66,7 @@ public final class User extends JavaClient {
 	}
 	@Override
 	public String toString() {
-		return "Username: " + this.USERNAME + "\nCurrent Hand: " + this.hand;
+		return "Username: " + this.USERNAME;
 	}
 	@Override
 	public boolean equals(Object o) {

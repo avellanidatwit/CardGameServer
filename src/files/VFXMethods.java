@@ -40,7 +40,7 @@ public class VFXMethods extends Application {
 	public User player = new User("Player 1");
 	
 	HashMap<String, Card> cardData = new HashMap<String, Card>(){{
-	    put("Stick", new Card());
+	    put("Stick", new Card("Stick", "Destroy 2 cards from opponents deck.", new Image("file:src/resources/Stick")));
 	}};
 
 	public static void main(String[] args) {
@@ -94,10 +94,12 @@ public class VFXMethods extends Application {
 		
 		// Adding 7 test cards
 		for (int i = 1; i <= 7; i++) { 
-			ImageView image = new ImageView(new Image("file:src/resources/Ingredient Deck_0" + i + ".png"));
+			Card card = createCard("Stick");
+			System.out.println("Card Image: " + card.getImage());
+			ImageView image = new ImageView(card.getImage());
 			image.setFitHeight(CARD_HEIGHT);
 			image.setFitWidth(CARD_WIDTH);
-			image.setUserData(new LocationCard("Test Card: " + i, "This is a test description"));
+			image.setUserData(card);
 			cardHand.getChildren().add(image);
 			makeDraggable(image, cardHand); // Testing draggable
 		}
@@ -163,6 +165,12 @@ public class VFXMethods extends Application {
 	    });
 
 	    
+	}
+	
+	public Card createCard(String name) {
+		Card card = cardData.get(name);
+		System.out.println("Card: " + card);
+		return new Card(card.getName(), card.getDescription(), card.getImage());
 	}
 	
 	class Delta {

@@ -11,34 +11,16 @@ public final class Card implements CardEffects {
 	final protected String DESCRIPTION;
 	final protected Image IMAGE;
 	protected int uses, maxUses;
-	protected CardLevel level;
-	protected CardTypes type;
 	/**
-	 * 4-arg constructor.
+	 * 3-arg constructor.
 	 * @param name Name of card.
 	 * @param description Description of card.
-	 * @param level Level of card.
-	 * @param type Type of card.
+	 * @param image Card image.
 	 */
-	public Card(String name, String description, Image image, CardLevel level, CardTypes type) {
+	public Card(String name, String description, Image image) {
 		this.NAME = name;
 		this.DESCRIPTION = description;
 		this.IMAGE = image;
-		this.level = level;
-		this.type = type;
-	}
-	/**
-	 * 3-arg constructor Type 1.
-	 * @param name Name of card.
-	 * @param description Description of card.
-	 * @param level Current level of card.
-	 */
-	public Card(String name, String description, Image image, CardLevel level) {
-		this.NAME = name;
-		this.DESCRIPTION = description;
-		this.IMAGE = image;
-		this.level = level;
-		this.type = CardTypes.NULL;
 	}
 	/**
 	 * No-arg constructor (mostly unused)
@@ -47,8 +29,6 @@ public final class Card implements CardEffects {
 		this.NAME = null;
 		this.DESCRIPTION = null;
 		this.IMAGE = null;
-		this.level = CardLevel.LV0Card;
-		this.type = CardTypes.NULL;
 	}
 	/**
 	 * Gets the name of the card.
@@ -65,20 +45,11 @@ public final class Card implements CardEffects {
 		return this.DESCRIPTION;
 	}
 	/**
-	 * Gets the card level.
-	 * @return The card's current level.
+	 * Gets the name of the card.
+	 * @return Name of the card.
 	 */
-	@Override
-	public CardLevel getCardLevel() {
-		return this.level;
-	}
-	/**
-	 * Sets the card level.
-	 * @param l Level to set.
-	 */
-	@Override
-	public void setCardLevel(CardLevel l) {
-		this.level = l;
+	public Image getImage() {
+		return this.IMAGE;
 	}
 	/**
 	 * Triggers a card's effects. This method is not to be called, and should later be implemented to throw an error that is handled appropriately as such.
@@ -96,7 +67,7 @@ public final class Card implements CardEffects {
 	public boolean equals(Object o) {
 		if(o instanceof Card) {
 			Card temp = (Card) o;
-			if(temp.getName().equals(this.NAME) && temp.getDescription().equals(this.DESCRIPTION) && temp.getCardLevel().equals(this.level)) {
+			if(temp.getName().equals(this.NAME) && temp.getDescription().equals(this.DESCRIPTION)) {
 				return true;
 			}
 			
@@ -109,12 +80,12 @@ public final class Card implements CardEffects {
 		return this.getCardType();
 	}
 	@Override
-	public void setCardType(CardTypes t) {
-		this.type = t;
+	public void trigger(Card c) {
+		// TODO Auto-generated method stub
 		
 	}
 	@Override
-	public void trigger(Card c) {
+	public void setCardType(CardTypes t) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -7,7 +7,7 @@ public sealed interface CardEffects permits Card {
 	CardTypes getCardType();
 	/**
 	 * Sets a card type.
-	 * @param t Card type to set.
+	 * @param t Card type to set
 	 */
 	void setCardType(CardTypes t);
 	/**
@@ -19,14 +19,4 @@ public sealed interface CardEffects permits Card {
 	 * @param c
 	 */
 	void trigger(Card c);
-	/**
-	 * Returns a card's level.
-	 * @return
-	 */
-	CardLevel getCardLevel();
-	/**
-	 * Sets a card's level.
-	 * @param l Level to set.
-	 */
-	void setCardLevel(CardLevel l);
 }
