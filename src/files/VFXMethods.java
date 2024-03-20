@@ -26,6 +26,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
+ * TODO: something's broken with git and i dont know what
  * Main Function
  * Use fadetransition for text
  * @author Dominic Avellani
