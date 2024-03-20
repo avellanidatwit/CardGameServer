@@ -1,8 +1,11 @@
 package files;
 
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.List;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -10,7 +13,7 @@ import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -18,6 +21,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -38,90 +42,71 @@ public class VFXMethods extends Application {
 	public static TurnStates turn = null;
 	
 	public User player = new User("Player 1");
+	public HBox hand = null;
 	
-	HashMap<String, Card> cardData = new HashMap<String, Card>(){{
-	    put("Stick", new Card("Stick", "Destroy 2 cards from opponents deck.", new Image("file:src/resources/Stick")));
+	HashMap<String[], Card> recipes = new HashMap<String[], Card>(){{
+	    put(new String[] {"Stick", "Sharp Stone"}, CardCreator.createCard("Axe"));
 	}};
 
-	public static void main(String[] args) {
-		
-		
-		// Launches the GUI
-        Application.launch(args);
-        
-        // Server Setup
-//		Scanner input = new Scanner(System.in);
-//		System.out.printf("Are you opening a client, or a server? (C/S): ");
-//		try {
-//			char uInput = input.next().charAt(0);
-//			if(uInput == 'C') {
-//				//TODO: run client
-//			}
-//			else if(uInput == 'S'){
-//				//TODO: run server
-//			}
-//			else {
-//				System.out.printf(ERR_INPUT);
-//			}
-//		}
-//		catch (InputMismatchException e) {
-//			System.out.printf(ERR_INPUT);
-//		}
-	}
+	public static void main(String[] args) {Application.launch(args);}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
 		// Create panes
 		BorderPane layout = new BorderPane();
-		HBox cardHand = new HBox();
-		Pane actionSelection = new Pane();
+		hand = new HBox();
+		Pane center = new Pane();
+		VBox actions = new VBox();
 		
-		// BorderPane setup
-		layout.setCenter(actionSelection);
-		layout.setBottom(cardHand);
-		layout.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+		// Left setup
+		Button drawCard = new Button();
+		drawCard.setText("Draw a Card");
+		drawCard.setMaxWidth(100);
+		drawCard.setMinWidth(100);
+		drawCard.setOnAction(e -> {addCardToHand(player.drawCard());});
+		
+		actions.setAlignment(Pos.CENTER);
+		actions.setSpacing(10);
+		actions.setMaxWidth(120);
+		actions.setMinWidth(120);
+		actions.getChildren().add(drawCard);
 		
 		// Center setup
-		actionSelection.setBackground(new Background(new BackgroundFill(Color.DARKOLIVEGREEN, CornerRadii.EMPTY, Insets.EMPTY))); // Background color
+		center.setBackground(new Background(new BackgroundFill(Color.DARKOLIVEGREEN, CornerRadii.EMPTY, Insets.EMPTY))); // Background color
 		
 		// Bottom bar setup
-		cardHand.setMinHeight(CARD_HEIGHT + (CARD_HEIGHT/5)); // Bar height
-		cardHand.setMaxHeight(CARD_HEIGHT + (CARD_HEIGHT/5));
-		cardHand.setSpacing(10); // Card Spacing
-		cardHand.setAlignment(Pos.CENTER);
-		cardHand.setBackground(new Background(new BackgroundFill(Color.DARKGREEN, CornerRadii.EMPTY, Insets.EMPTY))); // Background color
+		hand.setMinHeight(CARD_HEIGHT + (CARD_HEIGHT/5)); // Bar height
+		hand.setMaxHeight(CARD_HEIGHT + (CARD_HEIGHT/5));
+		hand.setSpacing(10); // Card Spacing
+		hand.setAlignment(Pos.CENTER);
+		hand.setBackground(new Background(new BackgroundFill(Color.DARKGREEN, CornerRadii.EMPTY, Insets.EMPTY))); // Background color
 		
-		// Adding 7 test cards
-		for (int i = 1; i <= 7; i++) { 
-			Card card = createCard("Stick");
-			System.out.println("Card Image: " + card.getImage());
-			ImageView image = new ImageView(card.getImage());
-			image.setFitHeight(CARD_HEIGHT);
-			image.setFitWidth(CARD_WIDTH);
-			image.setUserData(card);
-			cardHand.getChildren().add(image);
-			makeDraggable(image, cardHand); // Testing draggable
+		// BorderPane setup
+		layout.setCenter(center);
+		layout.setRight(actions);
+		layout.setBottom(hand);
+		layout.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+				
+		// Adding test cards
+		for (String key : CardCreator.cardData.keySet()) {
+			addCardToHand(CardCreator.createCard(key));
 		}
 		
 		// Stage setup
-		primaryStage.setTitle("Card Game"); // Window title
+		primaryStage.setTitle("Wasteland"); // Window title
 		primaryStage.setScene(new Scene(layout, WINDOW_WIDTH, WINDOW_HEIGHT)); // Set start scene
 		primaryStage.show();
 	}
 	
-	public void makeDraggable(ImageView node, Pane container) {
+	public void makeDraggable(ImageView node) {
 		final Delta start = new Delta();
 		final Delta dragDelta = new Delta();
-		
-		// Enable transfer mode to allow dragging
-	    node.setOnDragDetected(e -> {
-	        node.startFullDrag();
-	    });
 
 	    node.setOnMousePressed(e -> {
 	    	start.x = node.getTranslateX();
 			start.y = node.getTranslateY();
+			node.setViewOrder(-1);
 	    	dragDelta.x = node.getTranslateX() - e.getSceneX();
 	        dragDelta.y = node.getTranslateY() - e.getSceneY();
 	    });
@@ -135,22 +120,21 @@ public class VFXMethods extends Application {
 	        Point2D dropPoint = new Point2D(e.getSceneX(), e.getSceneY()-(WINDOW_HEIGHT -(CARD_HEIGHT + (CARD_HEIGHT/5))));
 	        
 	        if (dropPoint.getY() < 0 ) {
-	        	System.out.println("Use Card");
-	        	Card source = (Card)node.getUserData();
-	        	source.trigger();
-	        	container.getChildren().remove(node);
+	        	discardCard(node);
 	        }
 	        else {
 	        	boolean snap = true;
-		        for (Node child : container.getChildren()) {
+		        for (Node child : hand.getChildren()) {
 		            if (child instanceof ImageView && child.equals(node) == false) {
 			        	if (child.getBoundsInParent().contains(dropPoint)) {
-			        		Card target = (Card)child.getUserData(); // Get card information
-			        		Card source = (Card)node.getUserData();
-			        		System.out.println("Carfting " + source.getName() + " with " + target.getName()); // Print card name
-			        		snap = false;
-			        		container.getChildren().remove(node);
-			        		container.getChildren().remove(child);
+			        		Card result = canCraft((Card)node.getUserData(), (Card)child.getUserData());
+			        		System.out.println(result);
+			        		if(result != null) {
+			        			player.discard.addCard(result);
+			        			hand.getChildren().remove(node);
+				        		hand.getChildren().remove(child);
+				        		snap = false;
+			        		}
 			        		break;
 			        	}
 		            }
@@ -160,6 +144,7 @@ public class VFXMethods extends Application {
 		        	// Reset to start position
 		        	node.setTranslateX(start.x);
 		        	node.setTranslateY(start.y);
+		        	node.setViewOrder(0);
 		        }
 	        }
 	    });
@@ -167,10 +152,38 @@ public class VFXMethods extends Application {
 	    
 	}
 	
-	public Card createCard(String name) {
-		Card card = cardData.get(name);
-		System.out.println("Card: " + card);
-		return new Card(card.getName(), card.getDescription(), card.getImage());
+	public void addCardToHand(Card card) {
+		ImageView image = new ImageView(card.getImage());
+		image.setFitHeight(CARD_HEIGHT);
+		image.setFitWidth(CARD_WIDTH);
+		image.setUserData(card);
+		hand.getChildren().add(image);
+		makeDraggable(image); // Testing draggable
+	}
+	
+	public void discardCard(ImageView node) {
+		Card card = (Card) node.getUserData();
+		hand.getChildren().remove(node);
+		player.discard(card);
+	}
+	
+	public Card canCraft(Card card1, Card card2) {
+		String[] input1 = {card1.getName(), card2.getName()};
+		List<String> input = new ArrayList<String>(Arrays.asList(input1));
+
+		Collections.sort(input);
+		
+		System.out.println(input);
+		for(String[] key : recipes.keySet()) {
+			List<String> key1 = new ArrayList<String>(Arrays.asList(key));
+			Collections.sort(key1);
+
+			
+			if(input.equals(key1)) {
+				return recipes.get(key);
+			}
+		}
+		return null;
 	}
 	
 	class Delta {

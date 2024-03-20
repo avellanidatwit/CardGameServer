@@ -61,7 +61,7 @@ public final class Card implements CardEffects {
 	
 	@Override
 	public String toString() {
-		return "Name: " + this.NAME + "\nDescription: " + this.DESCRIPTION;
+		return "Name: " + this.NAME + " Description: " + this.DESCRIPTION;
 	}
 	@Override
 	public boolean equals(Object o) {

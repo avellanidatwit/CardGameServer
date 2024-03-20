@@ -1,4 +1,5 @@
 package files;
+
 /**
  * Class to establish a user's identity and hand.
  * @author evelyn
@@ -9,7 +10,7 @@ public final class User extends JavaClient {
 	protected Deck pile;
 	protected Deck trash;
 	protected Deck discard;
-	protected int id;
+	protected int id = 0;
 	/**
 	 * 1-arg Constructor
 	 * @param username A user's username.
@@ -23,47 +24,35 @@ public final class User extends JavaClient {
 			id++;
 		}
 		this.USERNAME = username;
-		this.pile = null;
-		this.trash = null;
-		this.discard = null;
-	}
-	/**
-	 * 2 arg constructor
-	 * @param username A user's username.
-	 * @param h The hand to set under the given user object.
-	 */
-	public User(String username, Deck h) {
-		if(id == 0) {
-			this.id = 0;
-		}
-		else {
-			this.id = id++;
-			id++;
-		}
-		this.USERNAME = username;
-		this.pile = null;
-		this.trash = null;
-		this.discard = null;
-	}
-	public User(String username, Deck h, TrashDiscard t, TrashDiscard d) {
-		if(id == 0) {
-			this.id = 0;
-		}
-		else {
-			this.id = id++;
-			id++;
-		}
-		this.USERNAME = username;
-		this.trash = t;
-		this.discard = d;
+		this.pile = new Deck();
+		pile.addCard(CardCreator.createCard("Forest"));
+		this.trash = new Deck();
+		this.discard = new Deck();
 	}
 	/**
 	 * Returns the user's username.
 	 * @return The user's username.
 	 */
-	public String getUsername() {
-		return this.USERNAME;
+	public String getUsername() {return this.USERNAME;}
+	/**
+	 * Draws a card from the pile. If the pile is empty, it reshuffles the discard and adds it to the pile.
+	 */
+	public Card drawCard() {
+		if(pile.isEmpty() == false) {
+			return pile.drawCard();
+		}
+		else if (discard.isEmpty() == false) {
+			pile.reshuffleDeck(discard.getCards());
+			discard.emptyDeck();
+			return pile.drawCard();
+		}
+		else return null;
 	}
+	/**
+	 * Adds a card to the discard.
+	 */
+	public void discard(Card card) {discard.addCard(card);}
+	
 	@Override
 	public String toString() {
 		return "Username: " + this.USERNAME;
