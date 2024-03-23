@@ -1,6 +1,5 @@
 package files;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -45,14 +44,16 @@ public class VFXMethods extends Application {
 	public User player = new User("Player 1");
 	public HBox hand = null;
 	
-	HashMap<String[], Card> recipes = new HashMap<String[], Card>(){{
-	    put(new String[] {"Stick", "Sharp Stone"}, CardCreator.createCard("Axe"));
-	}};
+	private HashMap<ArrayList<String>, Card> recipes = new HashMap<ArrayList<String>, Card>();
 
 	public static void main(String[] args) {Application.launch(args);}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		
+		// Crafting recipes
+		recipes.put(new ArrayList<String>() {{ add("Stick"); add("Sharp Stone");}}, CardCreator.createCard("Axe"));
+		recipes.put(new ArrayList<String>() {{ add("Stick"); add("Stick");}}, CardCreator.createCard("Log"));
 		
 		// Create panes
 		BorderPane layout = new BorderPane();
@@ -90,9 +91,11 @@ public class VFXMethods extends Application {
 		layout.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
 				
 		// Adding test cards
-		for (String key : CardCreator.cardData.keySet()) {
-			addCardToHand(CardCreator.createCard(key));
-		}
+		addCardToHand(CardCreator.createCard("Stick"));
+		addCardToHand(CardCreator.createCard("Stick"));
+		addCardToHand(CardCreator.createCard("Stick"));
+		addCardToHand(CardCreator.createCard("Sharp Stone"));
+		addCardToHand(CardCreator.createCard("Sharp Stone"));
 		
 		// Stage setup
 		primaryStage.setTitle("Wasteland"); // Window title
@@ -170,17 +173,14 @@ public class VFXMethods extends Application {
 	
 	public Card canCraft(Card card1, Card card2) {
 		String[] input1 = {card1.getName(), card2.getName()};
-		List<String> input = new ArrayList<String>(Arrays.asList(input1));
-
+		ArrayList<String> input = new ArrayList<String>() {{ add(card1.getName()); add(card2.getName());}};
 		Collections.sort(input);
-		
 		System.out.println(input);
-		for(String[] key : recipes.keySet()) {
-			List<String> key1 = new ArrayList<String>(Arrays.asList(key));
-			Collections.sort(key1);
-
-			
-			if(input.equals(key1)) {
+		for(ArrayList<String> key : recipes.keySet()) {
+			ArrayList<String> temp = new ArrayList<>(key);
+			Collections.sort(temp);
+			System.out.println(temp);
+			if(input.equals(temp)) {
 				return recipes.get(key);
 			}
 		}
