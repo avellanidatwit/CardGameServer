@@ -6,64 +6,66 @@ import java.util.Collections;
  * Class that establishes a deck, for use in the user hand and the overall deck of cards that will be drawn from.
  * @author evelyn
  */
-public sealed class Deck permits TrashDiscard {
+public class Deck {
 	protected ArrayList<Card> cards;
 	
 	/**
 	 * No-arg constructor.
 	 */
-	public Deck() {
-		this.cards = new ArrayList<Card>();
-	}
-	public Deck(ArrayList<Card> cards) {
-		this.cards = cards;
-	}
-	/**
-	 * Gets number of cards.
-	 * @return Returns the number of cards
-	 */
-	public int getNumberOfCards() {
-		return this.cards.size();
-	}
+	public Deck() {this.cards = new ArrayList<Card>();}
 	/**
 	 * Gets cards in the deck.
 	 * @return Returns the cards in the deck.
 	 */
-	public ArrayList<Card> getCards() {
-		return this.cards;
-	}
+	public ArrayList<Card> getCards() {return this.cards;}
+	/**
+	 * Takes a deck, sets this deck to the input, and shuffles
+	 */
+	public void reshuffleDeck(ArrayList<Card> list) {
+		this.cards = new ArrayList<Card>(list);
+		this.shuffleDeck();
+		}
+	/**
+	 * Checks if the deck is empty
+	 * @return True if empty. False if not.
+	 */
+	public boolean isEmpty() {return cards.isEmpty();}
+	/**
+	 * Checks if the deck is empty
+	 * @return True if empty. False if not.
+	 */
+	public void emptyDeck() {cards.clear();}
 	/**
 	 * Adds a card to the deck.
 	 * @param c Card to add.
 	 */
-	public void addCard(Card c) {
-		this.cards.add(c);
-	}
+	public void addCard(Card c) {this.cards.add(c);}
 	/**
 	 * Removes a card from the deck.
 	 * @param c Card to remove.
 	 */
-	public void removeCard(Card c) {
-		this.cards.remove(c);
-	}
-	/**
-	 * Sets cards in the deck
-	 * @param c New deck to set.
-	 */
-	public void setCards(ArrayList<Card> c) {
-		this.cards = c;
-	}
+	public void removeCard(Card c) {this.cards.remove(c);}
 	/**
 	 * Shuffles the deck.
 	 */
-	public void shuffleDeck() {
-		Collections.shuffle(this.cards);
+	public int deckCount() {return cards.size();}
+	/**
+	 * Shuffles the deck.
+	 */
+	public void shuffleDeck() {Collections.shuffle(this.cards);}
+	
+	/**
+	 * Draws the top card of the deck.
+	 */
+	public Card drawCard() {
+		Card card = this.cards.get(cards.size() - 1);
+		this.cards.remove(card);
+		return card;
 	}
 	
 	@Override
-	public String toString() {
-		return "Number of Cards: " + this.getNumberOfCards() + "\nCards: " + this.cards;
-	}
+	public String toString() {return "Cards: " + this.cards;}
+	
 	@Override
 	public boolean equals(Object o) {
 		if(o instanceof Deck) {
