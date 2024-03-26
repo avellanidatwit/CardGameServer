@@ -1,5 +1,5 @@
 package files;
-
+import java.io.IOException;
 /**
  * Class to establish a user's identity and hand.
  * @author evelyn
@@ -15,7 +15,7 @@ public final class User extends JavaClient {
 	 * 1-arg Constructor
 	 * @param username A user's username.
 	 */
-	public User(String username) {
+	public User(String username) throws IOException {
 		if(id == 0) {
 			this.id = 0;
 		}

@@ -9,7 +9,7 @@ import com.esotericsoftware.kryonet.Server;
 
 /**
  * This class implements java Socket server
- * @author Dominic Avellani
+ * @author evelyn
  *
  */
 
@@ -20,6 +20,8 @@ public class JavaServer {
     	
     	Server server = new Server();
     	Kryo kryo = server.getKryo();
+    	kryo.register(Card.class);
+    	kryo.register(Deck.class);
         kryo.register(SomeRequest.class);
         kryo.register(SomeResponse.class);
     	
