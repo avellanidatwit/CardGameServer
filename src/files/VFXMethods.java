@@ -1,5 +1,6 @@
 package files;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -39,9 +40,9 @@ public class VFXMethods extends Application {
 	public final int WINDOW_WIDTH = 1024;
 	
 	public static final String ERR_INPUT = "Invalid input. Please only input 1 letter, C or S.";
-	public static TurnStates turn = null;
-	// i have no clue whats causing this lol
-	public User player = new User("Player 1");
+	public static final String ERR_CONNECTION_FAIL = "Connection failed. Exiting program.\n Stack Trace: ";
+	public static TurnStates turn = null;	
+	public User player;
 	public HBox hand = null;
 	
 	private HashMap<ArrayList<String>, Card> recipes = new HashMap<ArrayList<String>, Card>();
@@ -50,6 +51,14 @@ public class VFXMethods extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		// IMPORTANT: this MAY break testing implementation. you may have to go into the javaclient superclass and then change the ip, or just temporarily move this out back to what it was previously.
+		try {
+			player = new User("Player 1");
+		}
+		catch(IOException e) {
+			System.out.printf(ERR_CONNECTION_FAIL + e.getStackTrace().toString());
+			System.exit(1);
+		}
 		
 		// Crafting recipes
 		recipes.put(new ArrayList<String>() {{ add("Stick"); add("Sharp Stone");}}, CardCreator.createCard("Axe"));
