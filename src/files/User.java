@@ -11,6 +11,10 @@ public final class User extends JavaClient {
 	protected Deck trash;
 	protected Deck discard;
 	protected int id = 0;
+	/**
+	 * 0-arg constructor, should never be used.
+	 * @throws IOException
+	 */
 	public User() throws IOException {
 		super();
 		this.USERNAME = null;
@@ -22,6 +26,7 @@ public final class User extends JavaClient {
 	/**
 	 * 1-arg Constructor
 	 * @param username A user's username.
+	 * @throws IOException
 	 */
 	public User(String username) throws IOException {
 		super();
