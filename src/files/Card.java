@@ -10,6 +10,7 @@ public final class Card implements CardEffects {
 	final protected String NAME;
 	final protected String DESCRIPTION;
 	final protected Image IMAGE;
+	// vvv why? this isnt used, whats the purpose of it
 	protected int uses, maxUses;
 	/**
 	 * 3-arg constructor.
