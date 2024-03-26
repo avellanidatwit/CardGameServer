@@ -6,10 +6,12 @@ import javafx.scene.image.Image;
  * A class to make a card, for use in the game.
  * @author evelyn
  */
-public final class Card implements CardEffects {
+public final class Card {
 	final protected String NAME;
 	final protected String DESCRIPTION;
 	final protected Image IMAGE;
+	
+	final protected int priority;
 	protected int uses, maxUses;
 	/**
 	 * 3-arg constructor.
@@ -21,21 +23,29 @@ public final class Card implements CardEffects {
 		this.NAME = name;
 		this.DESCRIPTION = description;
 		this.IMAGE = image;
+		this.priority = 1;
 	}
-	/**
-	 * No-arg constructor (mostly unused)
-	 */
-	public Card() {
-		this.NAME = null;
-		this.DESCRIPTION = null;
-		this.IMAGE = null;
+	
+	public Card(String name, String description, Image image, int priority) {
+		this.NAME = name;
+		this.DESCRIPTION = description;
+		this.IMAGE = image;
+		this.priority = priority;
 	}
+	
 	/**
 	 * Gets the name of the card.
 	 * @return Name of the card.
 	 */
 	public String getName() {
 		return this.NAME;
+	}
+	/**
+	 * Gets the priority of the card.
+	 * @return Description of the card.
+	 */
+	public int getPriority() {
+		return this.priority;
 	}
 	/**
 	 * Gets the description of the card.
@@ -74,18 +84,8 @@ public final class Card implements CardEffects {
 		}
 		return false;
 	}
-	@Override
-	public CardTypes getCardType() {
-		// TODO Auto-generated method stub
-		return this.getCardType();
-	}
-	@Override
+	
 	public void trigger(Card c) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void setCardType(CardTypes t) {
 		// TODO Auto-generated method stub
 		
 	}

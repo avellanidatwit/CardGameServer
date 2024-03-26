@@ -13,27 +13,11 @@ public enum TurnStates {
 	 */
 	USER2PLAY,
 	/**
-	 * Get's the effects from cards played.
-	 */
-	GETEFFECTS,
-	/**
-	 * Triggers the effects from cards played.
-	 */
-	TRIGGEREFFECTS,
-	/**
 	 * Syncs the hands/deck.
 	 */
-	SYNCDECK,
+	DISCARD,
 	/**
 	 * Checks for a win condition.
 	 */
-	CHECKWINCONDITIONS,
-	/**
-	 * Resets turn
-	 */
-	RESET,
-	/**
-	 * Waits for users to sync.
-	 */
-	AWAITFORSYNC
+	CHECKWINCONDITIONS
 }

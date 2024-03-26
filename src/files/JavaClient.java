@@ -1,5 +1,6 @@
 package files;
 import java.io.IOException;
+import java.util.Scanner;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Client;
@@ -18,23 +19,19 @@ public abstract sealed class JavaClient permits User {
     	
     	Client client = new Client();
     	Kryo kryo = client.getKryo();
-        kryo.register(SomeRequest.class);
-        kryo.register(SomeResponse.class);
+    	kryo.register(Card.class);
+    	kryo.register(SomeResponse.class);
     	
     	client.addListener(new Listener() {
     	       public void received (Connection connection, Object object) {
     	          if (object instanceof SomeResponse) {
     	             SomeResponse response = (SomeResponse)object;
-    	             System.out.println(response.text);
+    	             System.out.println("Server: " + response.text);
     	          }
     	       }
     	    });
     	
         client.start();
         client.connect(5000, "127.0.0.1", 54555, 54777);
-        
-        SomeRequest request = new SomeRequest();
-        request.text = "Here is the request";
-        client.sendTCP(request);
     }
 }

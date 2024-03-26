@@ -20,17 +20,17 @@ public class JavaServer {
     	
     	Server server = new Server();
     	Kryo kryo = server.getKryo();
-        kryo.register(SomeRequest.class);
+    	kryo.register(Card.class);
         kryo.register(SomeResponse.class);
     	
     	server.addListener(new Listener() {
     	       public void received (Connection connection, Object object) {
-    	          if (object instanceof SomeRequest) {
-    	             SomeRequest request = (SomeRequest)object;
-    	             System.out.println(request.text);
+    	          if (object instanceof Card) {
+    	             Card card = (Card)object;
+    	             System.out.println(card.getName());
     	    
     	             SomeResponse response = new SomeResponse();
-    	             response.text = "Thanks";
+    	             response.text = "Activated: " + card.getName();
     	             connection.sendTCP(response);
     	          }
     	       }

@@ -13,11 +13,13 @@ public class Deck {
 	 * No-arg constructor.
 	 */
 	public Deck() {this.cards = new ArrayList<Card>();}
+	
 	/**
 	 * Gets cards in the deck.
 	 * @return Returns the cards in the deck.
 	 */
 	public ArrayList<Card> getCards() {return this.cards;}
+	
 	/**
 	 * Takes a deck, sets this deck to the input, and shuffles
 	 */
@@ -25,30 +27,31 @@ public class Deck {
 		this.cards = new ArrayList<Card>(list);
 		this.shuffleDeck();
 		}
+	
 	/**
 	 * Checks if the deck is empty
 	 * @return True if empty. False if not.
 	 */
 	public boolean isEmpty() {return cards.isEmpty();}
+	
 	/**
 	 * Checks if the deck is empty
 	 * @return True if empty. False if not.
 	 */
 	public void emptyDeck() {cards.clear();}
+	
 	/**
 	 * Adds a card to the deck.
 	 * @param c Card to add.
 	 */
 	public void addCard(Card c) {this.cards.add(c);}
+	
 	/**
 	 * Removes a card from the deck.
 	 * @param c Card to remove.
 	 */
 	public void removeCard(Card c) {this.cards.remove(c);}
-	/**
-	 * Shuffles the deck.
-	 */
-	public int deckCount() {return cards.size();}
+	
 	/**
 	 * Shuffles the deck.
 	 */
@@ -56,11 +59,23 @@ public class Deck {
 	
 	/**
 	 * Draws the top card of the deck.
+	 * @return Top card of the deck
 	 */
 	public Card drawCard() {
 		Card card = this.cards.get(cards.size() - 1);
 		this.cards.remove(card);
 		return card;
+	}
+	
+	/**
+	 * Returns a card in the deck after sorting by priority.
+	 * @return First card in the priority.
+	 */
+	public Card getCard() {
+		ArrayList<Card> list = this.getCards();
+		Collections.shuffle(list);
+		Collections.sort(list, (o1, o2) -> o1.getPriority() - o2.getPriority());
+		return list.get(0);
 	}
 	
 	@Override

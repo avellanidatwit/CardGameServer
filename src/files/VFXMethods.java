@@ -1,11 +1,5 @@
 package files;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
@@ -25,35 +19,29 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
- * TODO: something's broken with git and i dont know what
  * Main Function
  * Use fadetransition for text
  * @author Dominic Avellani
  */
 public class VFXMethods extends Application {
 	
+	// Card dimensions
 	public final int CARD_HEIGHT = 180;
 	public final int CARD_WIDTH = 128;
 	
+	// Play window dimensions
 	public final int WINDOW_HEIGHT = 768;
 	public final int WINDOW_WIDTH = 1024;
 	
-	public static final String ERR_INPUT = "Invalid input. Please only input 1 letter, C or S.";
 	public static TurnStates turn = null;
 	
 	public User player = new User("Player 1");
 	public HBox hand = null;
-	
-	private HashMap<ArrayList<String>, Card> recipes = new HashMap<ArrayList<String>, Card>();
 
 	public static void main(String[] args) {Application.launch(args);}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
-		// Crafting recipes
-		recipes.put(new ArrayList<String>() {{ add("Stick"); add("Sharp Stone");}}, CardCreator.createCard("Axe"));
-		recipes.put(new ArrayList<String>() {{ add("Stick"); add("Stick");}}, CardCreator.createCard("Log"));
 		
 		// Create panes
 		BorderPane layout = new BorderPane();
@@ -91,11 +79,11 @@ public class VFXMethods extends Application {
 		layout.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
 				
 		// Adding test cards
-		addCardToHand(CardCreator.createCard("Stick"));
-		addCardToHand(CardCreator.createCard("Stick"));
-		addCardToHand(CardCreator.createCard("Stick"));
-		addCardToHand(CardCreator.createCard("Sharp Stone"));
-		addCardToHand(CardCreator.createCard("Sharp Stone"));
+		addCardToHand(CardCreator.getInstance().createCard("Stick"));
+		addCardToHand(CardCreator.getInstance().createCard("Stick"));
+		addCardToHand(CardCreator.getInstance().createCard("Stick"));
+		addCardToHand(CardCreator.getInstance().createCard("Sharp Stone"));
+		addCardToHand(CardCreator.getInstance().createCard("Sharp Stone"));
 		
 		// Stage setup
 		primaryStage.setTitle("Wasteland"); // Window title
@@ -103,6 +91,9 @@ public class VFXMethods extends Application {
 		primaryStage.show();
 	}
 	
+	/**
+	 * Makes the cards interactable by adding mouse behaviors.
+	 */
 	public void makeDraggable(ImageView node) {
 		final Delta start = new Delta();
 		final Delta dragDelta = new Delta();
@@ -131,8 +122,7 @@ public class VFXMethods extends Application {
 		        for (Node child : hand.getChildren()) {
 		            if (child instanceof ImageView && child.equals(node) == false) {
 			        	if (child.getBoundsInParent().contains(dropPoint)) {
-			        		Card result = canCraft((Card)node.getUserData(), (Card)child.getUserData());
-			        		System.out.println(result);
+			        		Card result = CardCreator.getInstance().canCraft((Card)node.getUserData(), (Card)child.getUserData());
 			        		if(result != null) {
 			        			player.discard.addCard(result);
 			        			hand.getChildren().remove(node);
@@ -152,10 +142,11 @@ public class VFXMethods extends Application {
 		        }
 	        }
 	    });
-
-	    
 	}
 	
+	/**
+	 * Takes a card object and creates a visual representation in the players hand.
+	 */
 	public void addCardToHand(Card card) {
 		ImageView image = new ImageView(card.getImage());
 		image.setFitHeight(CARD_HEIGHT);
@@ -165,26 +156,13 @@ public class VFXMethods extends Application {
 		makeDraggable(image); // Testing draggable
 	}
 	
+	/**
+	 * Removes the visual card from the player and adds the object to the discard pile.
+	 */
 	public void discardCard(ImageView node) {
 		Card card = (Card) node.getUserData();
 		hand.getChildren().remove(node);
-		player.discard(card);
-	}
-	
-	public Card canCraft(Card card1, Card card2) {
-		String[] input1 = {card1.getName(), card2.getName()};
-		ArrayList<String> input = new ArrayList<String>() {{ add(card1.getName()); add(card2.getName());}};
-		Collections.sort(input);
-		System.out.println(input);
-		for(ArrayList<String> key : recipes.keySet()) {
-			ArrayList<String> temp = new ArrayList<>(key);
-			Collections.sort(temp);
-			System.out.println(temp);
-			if(input.equals(temp)) {
-				return recipes.get(key);
-			}
-		}
-		return null;
+		player.discardCard(card);
 	}
 	
 	class Delta {
