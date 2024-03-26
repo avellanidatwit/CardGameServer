@@ -40,7 +40,7 @@ public class VFXMethods extends Application {
 	
 	public static final String ERR_INPUT = "Invalid input. Please only input 1 letter, C or S.";
 	public static TurnStates turn = null;
-	
+	// i have no clue whats causing this lol
 	public User player = new User("Player 1");
 	public HBox hand = null;
 	

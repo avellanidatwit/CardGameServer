@@ -23,6 +23,7 @@ public abstract sealed class JavaClient permits User {
 	public JavaClient() throws IOException {
 		client = new Client();
 		client.start();
+		
 		try {
 			client.connect(5000, serverIP, 54555, 54777);
 		}
