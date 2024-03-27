@@ -44,11 +44,9 @@ class CardCreator {
 		String[] input1 = {card1.getName(), card2.getName()};
 		ArrayList<String> input = new ArrayList<String>() {{ add(card1.getName()); add(card2.getName());}};
 		Collections.sort(input);
-		System.out.println(input);
 		for(ArrayList<String> key : recipes.keySet()) {
 			ArrayList<String> temp = new ArrayList<>(key);
 			Collections.sort(temp);
-			System.out.println(temp);
 			if(input.equals(temp)) {
 				return recipes.get(key);
 			}

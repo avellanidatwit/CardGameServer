@@ -1,6 +1,7 @@
 package files;
 
 import javafx.animation.FadeTransition;
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
@@ -15,7 +16,6 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -38,8 +38,11 @@ public class VFXMethods extends Application {
 	public final int WINDOW_WIDTH = 1024;
 	
 	public static TurnStates turn = null;
+	public static final String ERR_INPUT = "Invalid input. Please only input 1 letter, C or S.";
+	public static final String ERR_CONNECTION_FAIL = "Connection failed. Exiting program.\n Stack Trace: ";
 	
-	public User player = new User("Player 1");
+	public User player;
+	
 	public HBox hand = null;
 	public VBox center = null;
 
@@ -47,6 +50,7 @@ public class VFXMethods extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		player = new User("Player 1");
 		
 		// Create panes
 		BorderPane layout = new BorderPane();
@@ -96,6 +100,9 @@ public class VFXMethods extends Application {
 		addCardToHand(CardCreator.getInstance().createCard("Stick"));
 		addCardToHand(CardCreator.getInstance().createCard("Sharp Stone"));
 		addCardToHand(CardCreator.getInstance().createCard("Sharp Stone"));
+		addCardToHand(CardCreator.getInstance().createCard("Rope"));
+		addCardToHand(CardCreator.getInstance().createCard("Rope"));
+		
 		
 		// Stage setup
 		primaryStage.setTitle("Wasteland"); // Window title

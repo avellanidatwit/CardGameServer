@@ -1,14 +1,11 @@
 package files;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-
+import java.io.IOException;
 /**
  * Class to establish a user's identity and hand.
  * @author evelyn
  */
-public final class User extends JavaClient {
+public final class User {
 	
 	final protected String USERNAME;
 	protected Deck pile;
@@ -19,8 +16,21 @@ public final class User extends JavaClient {
 	protected int id;
 	
 	/**
+	 * 0-arg constructor, should never be used.
+	 * @throws IOException
+	 */
+	public User() {
+		super();
+		this.USERNAME = null;
+		this.pile = null;
+		this.trash = null;
+		this.discard = null;
+		this.id = -1;
+	}
+	/**
 	 * 1-arg Constructor
 	 * @param username A user's username.
+	 * @throws IOException
 	 */
 	public User(String username) {
 		// Create id and username
