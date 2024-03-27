@@ -1,5 +1,6 @@
 package files;
 
+import java.awt.Image;
 import java.io.IOException;
 
 import com.esotericsoftware.kryo.Kryo;
@@ -20,6 +21,7 @@ public class JavaServer implements RMIMethods {
     	
     	Server server = new Server();
     	Kryo kryo = server.getKryo();
+    	kryo.register(Image.class);
     	kryo.register(Card.class);
     	kryo.register(Deck.class);
     	kryo.register(ObjectRegistrationResponse.class);

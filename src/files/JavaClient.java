@@ -5,6 +5,7 @@ import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Listener.ThreadedListener;
+import com.esotericsoftware.kryonet.rmi.ObjectSpace;
 
 /**
  * This class implements the java socket client
@@ -20,7 +21,6 @@ public abstract sealed class JavaClient permits User {
 	public JavaClient() throws IOException {
 		client = new Client();
 		client.start();
-		
 		Network.register(client);
 		
 		client.addListener(new Listener() {
