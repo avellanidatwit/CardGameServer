@@ -23,6 +23,20 @@ public abstract sealed class JavaClient permits User {
 	public JavaClient() throws IOException {
 		client = new Client();
 		client.start();
+		Network.register(client);
+		client.addListener(new Listener() {
+	       public void received (Connection connection, Object object) {
+	          if(object instanceof ObjectRegistrationResponse) {
+	        	  ObjectRegistrationResponse r = (ObjectRegistrationResponse) object;
+	        	  System.out.printf("Object Registered:%nObject: %s%nID:%02d%n", r.o, r.id);
+	          }
+	       }
+	    });
+		client.addListener(new ThreadedListener(new Listener() {
+			public void disconnected(Connection connection) {
+				System.exit(0);
+			}
+		}));
 		try {
 			client.connect(5000, serverIP, 54555, 54777);
 		}
@@ -33,21 +47,6 @@ public abstract sealed class JavaClient permits User {
 		finally {
 			System.out.println("Connection succeeded, continuing.");
 		}
-		
-		Network.register(client);
-		client.addListener(new Listener() {
-	       public void received (Connection connection, Object object) {
-	          if (object instanceof SomeResponse) {
-	             SomeResponse response = (SomeResponse)object;
-	             System.out.println(response.text);
-	          }
-	       }
-	    });
-		client.addListener(new ThreadedListener(new Listener() {
-			public void disconnected(Connection connection) {
-				System.exit(0);
-			}
-		}));
 		
 	}
 }

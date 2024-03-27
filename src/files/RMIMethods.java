@@ -10,16 +10,6 @@ public interface RMIMethods {
 			RMI.register(id, temp);
 			return true;
 		}
-		else if(o instanceof SomeRequest) {
-			SomeRequest temp = (SomeRequest) o;
-			RMI.register(id, temp);
-			return true;
-		}
-		else if(o instanceof SomeResponse) {
-			SomeResponse temp = (SomeResponse) o;
-			RMI.register(id, temp);
-			return true;
-		}
 		else if(o instanceof Deck){
 			Deck temp = (Deck) o;
 			RMI.register(id, temp);
