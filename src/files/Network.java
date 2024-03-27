@@ -1,12 +1,8 @@
 package files;
 
 import com.esotericsoftware.kryo.Kryo;
-import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.EndPoint;
 import com.esotericsoftware.kryonet.rmi.ObjectSpace;
-
-import javafx.scene.image.Image;
-import java.util.ArrayList;
 
 /**
  * Class to handle server side operations

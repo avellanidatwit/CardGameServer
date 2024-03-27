@@ -1,13 +1,10 @@
 package files;
 
 import java.io.IOException;
-import java.util.HashMap;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Listener.ThreadedListener;
-import com.esotericsoftware.kryonet.Listener.TypeListener;
-import com.esotericsoftware.minlog.Log;
 
 /**
  * This class implements the java socket client
@@ -23,12 +20,17 @@ public abstract sealed class JavaClient permits User {
 	public JavaClient() throws IOException {
 		client = new Client();
 		client.start();
+		
 		Network.register(client);
+		
 		client.addListener(new Listener() {
 	       public void received (Connection connection, Object object) {
 	          if(object instanceof ObjectRegistrationResponse) {
 	        	  ObjectRegistrationResponse r = (ObjectRegistrationResponse) object;
-	        	  System.out.printf("Object Registered:%nObject: %s%nID:%02d%n", r.o, r.id);
+	        	  System.out.printf("Object Registration Status:%nStatus:%s%nObject: %s%nID:%02d%n", 
+	        			  r.status ? "Successful" : "Failed",
+	        			  r.o, 
+	        			  r.id);
 	          }
 	       }
 	    });
@@ -37,6 +39,7 @@ public abstract sealed class JavaClient permits User {
 				System.exit(0);
 			}
 		}));
+		
 		try {
 			client.connect(5000, serverIP, 54555, 54777);
 		}
