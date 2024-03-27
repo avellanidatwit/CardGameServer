@@ -12,13 +12,14 @@ import java.util.ArrayList;
  * Class to handle server side operations
  * @author evelyn
  */
-public class Network {
+public class Network implements RMIMethods {
 	
 	static public final int port = 54555;
 	static public ObjectSpace OSN = new ObjectSpace();
 	static public void register(EndPoint endPoint) {
 		Kryo kryo = endPoint.getKryo();
 		kryo.register(Card.class);
+		kryo.register(ObjectRegistrationResponse.class);
 		kryo.register(SomeRequest.class);
 		kryo.register(SomeResponse.class);
 		kryo.register(Deck.class);
@@ -26,32 +27,16 @@ public class Network {
 		ObjectSpace.registerClasses(kryo);
 	}
 	
-	static public void objectRegistrar(Object o, int id) {
-		if(o instanceof Card) {
-			Card temp = (Card) o;
-			OSN.register(id, temp);
-		}
-		else if(o instanceof SomeRequest) {
-			SomeRequest temp = (SomeRequest) o;
-			OSN.register(id, temp);
-		}
-		else if(o instanceof SomeResponse) {
-			SomeResponse temp = (SomeResponse) o;
-			OSN.register(id, temp);
-		}
-		else if(o instanceof Deck){
-			Deck temp = (Deck) o;
-			OSN.register(id, temp);
-		}
-		else {
-			System.out.printf("WARNING: invalid object detected, object " + o + " not registered.");
-		}
-	}
+		
 	
-	static public void OSConnector(Connection c) {
-		OSN.addConnection(c);
+	/**
+	 * Kryo handler for object registration response
+	 */
+	static public class ObjectRegistrationResponse {
+		public int id;
+		public boolean status;
+		public Object o;
 	}
-
 	/**
 	 * Kryo handler for Card
 	 */
