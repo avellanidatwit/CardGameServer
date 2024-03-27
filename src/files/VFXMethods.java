@@ -1,5 +1,6 @@
 package files;
 
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
@@ -7,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -16,7 +18,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * Main Function
@@ -37,6 +41,7 @@ public class VFXMethods extends Application {
 	
 	public User player = new User("Player 1");
 	public HBox hand = null;
+	public VBox center = null;
 
 	public static void main(String[] args) {Application.launch(args);}
 
@@ -46,23 +51,30 @@ public class VFXMethods extends Application {
 		// Create panes
 		BorderPane layout = new BorderPane();
 		hand = new HBox();
-		Pane center = new Pane();
+		center = new VBox();
 		VBox actions = new VBox();
 		
 		// Left setup
-		Button drawCard = new Button();
-		drawCard.setText("Draw a Card");
-		drawCard.setMaxWidth(100);
-		drawCard.setMinWidth(100);
-		drawCard.setOnAction(e -> {addCardToHand(player.drawCard());});
+		Button drawCardButton = new Button();
+		drawCardButton.setText("Draw a Card");
+		drawCardButton.setMaxWidth(100);
+		drawCardButton.setMinWidth(100);
+		drawCardButton.setOnAction(e -> {addCardToHand(player.drawCard());});
+		
+		Button textTestButton = new Button();
+		textTestButton.setText("Test text");
+		textTestButton.setMaxWidth(100);
+		textTestButton.setMinWidth(100);
+		textTestButton.setOnAction(e -> {textNotification("Welcome to earth!!");});
 		
 		actions.setAlignment(Pos.CENTER);
 		actions.setSpacing(10);
 		actions.setMaxWidth(120);
 		actions.setMinWidth(120);
-		actions.getChildren().add(drawCard);
+		actions.getChildren().addAll(drawCardButton, textTestButton);
 		
 		// Center setup
+		center.setAlignment(Pos.CENTER);
 		center.setBackground(new Background(new BackgroundFill(Color.DARKOLIVEGREEN, CornerRadii.EMPTY, Insets.EMPTY))); // Background color
 		
 		// Bottom bar setup
@@ -124,9 +136,10 @@ public class VFXMethods extends Application {
 			        	if (child.getBoundsInParent().contains(dropPoint)) {
 			        		Card result = CardCreator.getInstance().canCraft((Card)node.getUserData(), (Card)child.getUserData());
 			        		if(result != null) {
-			        			player.discard.addCard(result);
 			        			hand.getChildren().remove(node);
 				        		hand.getChildren().remove(child);
+				        		player.discard.addCard(result);
+				        		textNotification("Successfully crafted " + result.getName() + ".");
 				        		snap = false;
 			        		}
 			        		break;
@@ -163,6 +176,28 @@ public class VFXMethods extends Application {
 		Card card = (Card) node.getUserData();
 		hand.getChildren().remove(node);
 		player.discardCard(card);
+		textNotification(card.getName() + " was discarded.");}
+	
+	/**
+	 * A method that creates a text label in the center of the screen to display information to the user.
+	 */
+	public void textNotification(String text) {
+		Label label = new Label();
+		label.setFont(new Font("Papyrus", 30));
+		label.setTextFill(Color.WHITE);
+		label.setText(text);
+		
+		center.getChildren().add(label);
+		
+		FadeTransition ft = new FadeTransition(Duration.millis(5000), label);
+	    ft.setFromValue(1.0);
+	    ft.setToValue(0.0);
+	    ft.setCycleCount(1);
+	    ft.setAutoReverse(false);
+	    
+	    ft.setOnFinished(e -> {center.getChildren().remove(label);});
+	 
+	    ft.play();
 	}
 	
 	class Delta {
