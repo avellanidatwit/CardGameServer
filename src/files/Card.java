@@ -9,24 +9,32 @@ import javafx.scene.image.Image;
 public final class Card {
 	final protected String NAME;
 	final protected String DESCRIPTION;
-	final protected Image IMAGE;
+	final protected String IMAGE;
 	
 	final protected int priority;
 	protected int uses, maxUses;
+	
+	public Card() {
+		this.NAME = "";
+		this.DESCRIPTION = "";
+		this.IMAGE = "";
+		this.priority = 1;
+	}
+	
 	/**
 	 * 3-arg constructor.
 	 * @param name Name of card.
 	 * @param description Description of card.
 	 * @param image Card image.
 	 */
-	public Card(String name, String description, Image image) {
+	public Card(String name, String description, String image) {
 		this.NAME = name;
 		this.DESCRIPTION = description;
 		this.IMAGE = image;
 		this.priority = 1;
 	}
 	
-	public Card(String name, String description, Image image, int priority) {
+	public Card(String name, String description, String image, int priority) {
 		this.NAME = name;
 		this.DESCRIPTION = description;
 		this.IMAGE = image;
@@ -58,7 +66,7 @@ public final class Card {
 	 * Gets the name of the card.
 	 * @return Name of the card.
 	 */
-	public Image getImage() {
+	public String getImage() {
 		return this.IMAGE;
 	}
 	/**
@@ -71,7 +79,7 @@ public final class Card {
 	
 	@Override
 	public String toString() {
-		return "Name: " + this.NAME + " Description: " + this.DESCRIPTION;
+		return this.NAME;
 	}
 	@Override
 	public boolean equals(Object o) {

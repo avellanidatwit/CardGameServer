@@ -1,6 +1,9 @@
 package files;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 /**
  * Class to establish a user's identity and hand.
  * @author evelyn
@@ -85,6 +88,72 @@ public final class User {
 		Card card = pile.getCard();
 		pile.removeCard(card); 
 		trash.addCard(card);}
+	
+	public ArrayList<Card> Forest() {
+		int range = randomIntRange(3, 5);
+		ArrayList<Card> list = new ArrayList<Card>();
+		Card card;
+		for (int i = 0; i < range; i++) {
+			switch(randomIntRange(1, 3)) {
+			case 1: 
+				card = CardCreator.getInstance().createCard("Log");
+				discard.addCard(card);
+				list.add(card);
+				break;
+			case 2:
+				card = CardCreator.getInstance().createCard("Stone");
+				discard.addCard(card);
+				list.add(card);
+				break;
+			case 3:
+				card = CardCreator.getInstance().createCard("Rope");
+				discard.addCard(card);
+				list.add(card);
+				break;
+			}
+		}
+		return list;
+	}
+	
+	public ArrayList<Card> Log() {
+		int range = randomIntRange(2, 3);
+		ArrayList<Card> list = new ArrayList<Card>();
+		Card card;
+		for (int i = 0; i < range; i++) {
+			card = CardCreator.getInstance().createCard("Stick");
+			discard.addCard(card);
+			list.add(card);
+		}
+		return list;
+	}
+	
+	public ArrayList<Card> Stone() {
+		int range = randomIntRange(2, 3);
+		ArrayList<Card> list = new ArrayList<Card>();
+		Card card;
+		for (int i = 0; i < range; i++) {
+			card = CardCreator.getInstance().createCard("Sharp Stone");
+			discard.addCard(card);
+			list.add(card);
+		}
+		return list;
+	}
+	
+	public ArrayList<Card> Bandage() {
+		ArrayList<Card> list = new ArrayList<Card>();
+		Card card;
+		for (int i = 0; i < 2; i++) {
+			card = CardCreator.getInstance().createCard("Bandage");
+			discard.addCard(card);
+			list.add(card);
+		}
+		return list;
+	}
+	public int randomIntRange(int start, int end) {
+	    Random random = new Random();
+	    int number = random.nextInt((end - start) + 1) + start; // see explanation below
+	    return number;
+	}
 	
 	@Override
 	public String toString() {return "Username: " + this.USERNAME;}

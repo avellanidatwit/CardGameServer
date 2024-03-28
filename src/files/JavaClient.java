@@ -1,56 +1,66 @@
 package files;
 import java.io.IOException;
+import java.net.InetAddress;
+
+import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
-import com.esotericsoftware.kryonet.Listener.ThreadedListener;
+import com.esotericsoftware.kryonet.Listener.TypeListener;
+
+import javafx.application.Platform;
+
+import files.packets.Text;
 
 /**
- * This class implements the java socket client
+ * A players connection to the game server.
  * @author evelyn
  *
  */
-// TODO: restructure this class into an actual client instead of an example case.
 public class JavaClient {
-	Client client;
-	String name;
+	public Client client;
 	
-	//TODO: implement a way to get/input the server ip.	
-	static final String serverIP = "127.0.0.1";
-	
-	public JavaClient() {
-		client = new Client();
-		client.start();
+	// A reference to the GUI script
+	public VFXMethods vfxmethods;
+
+    public JavaClient(VFXMethods vfxmethods) throws IOException {
+    	
+    	this.vfxmethods = vfxmethods;
+    	
+        client = new Client();
+        // Registering the classes to be sent over the network
+        Network.register(client);
+        InetAddress address = client.discoverHost(54777, 5000);
+        
+        Kryo kryo = client.getKryo();
+        kryo.setRegistrationRequired(false);
+
+        client.start();
+        client.connect(5000, address, 54555, 54777);
+
+        setupController();
+    }
+
+    // Server response handling
+    public void setupController() {
+    	TypeListener typeListener = new TypeListener();
+    	
+    	// When the server sends a card object, the player draw the card.
+		typeListener.addTypeHandler(Card.class, (connection, card) -> {
+			Platform.runLater(new Runnable() {
+			    @Override
+			    public void run() {
+			    	vfxmethods.addCardToHand(card);}});	
+		});
 		
-		Network.register(client);
+		// When the server sends a card object, the player draw the card.
+		typeListener.addTypeHandler(Text.class, (connection, text) -> {
+			Platform.runLater(new Runnable() {
+			    @Override
+			    public void run() {
+			    	vfxmethods.textNotification(text.message);}});	
+		});
 		
-		client.addListener(new Listener() {
-	       public void received (Connection connection, Object object) {
-	          if(object instanceof ObjectRegistrationResponse) {
-	        	  ObjectRegistrationResponse r = (ObjectRegistrationResponse) object;
-	        	  System.out.printf("Object Registration Status:%nStatus:%s%nObject: %s%nID:%02d%n", 
-	        			  r.status ? "Successful" : "Failed",
-	        			  r.o, 
-	        			  r.id);
-	          }
-	       }
-	    });
-		client.addListener(new ThreadedListener(new Listener() {
-			public void disconnected(Connection connection) {
-				System.exit(0);
-			}
-		}));
-		
-		try {
-			client.connect(5000, serverIP, 54555, 54777);
-		}
-		catch(IOException e) {
-			System.out.printf("Connection failed, exiting program.%nStack Trace: %s", e.getStackTrace().toString());
-			System.exit(1);
-		}
-		finally {
-			System.out.println("Connection succeeded, continuing.");
-		}
-		
-	}
+		client.addListener(typeListener);
+    }
 }

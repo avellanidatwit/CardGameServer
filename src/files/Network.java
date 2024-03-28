@@ -1,27 +1,23 @@
 package files;
 
-import java.awt.Image;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.EndPoint;
-import com.esotericsoftware.kryonet.rmi.ObjectSpace;
+import files.packets.Request;
+import files.packets.Text;
 
 /**
  * Class to handle server side operations
  * @author evelyn
  */
-public class Network implements RMIMethods {
-	
-	static public final int port = 54555;
-	
-	static public ObjectSpace OSN = new ObjectSpace();
+public class Network {
 	
 	static public void register(EndPoint endPoint) {
 		Kryo kryo = endPoint.getKryo();
-		kryo.register(Image.class);
 		kryo.register(Card.class);
 		kryo.register(Deck.class);
-		kryo.register(ObjectRegistrationResponse.class);
+		kryo.register(User.class);
+		kryo.register(Request.class);
+		kryo.register(Text.class);
 		
-		ObjectSpace.registerClasses(kryo);
 	}
 }

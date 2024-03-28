@@ -2,6 +2,8 @@ package files;
 
 import javafx.animation.FadeTransition;
 import java.io.IOException;
+
+import files.packets.Request;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
@@ -38,10 +40,8 @@ public class VFXMethods extends Application {
 	public final int WINDOW_WIDTH = 1024;
 	
 	public static TurnStates turn = null;
-	public static final String ERR_INPUT = "Invalid input. Please only input 1 letter, C or S.";
-	public static final String ERR_CONNECTION_FAIL = "Connection failed. Exiting program.\n Stack Trace: ";
 	
-	public User player;
+	public JavaClient connectionToServer;
 	
 	public HBox hand = null;
 	public VBox center = null;
@@ -50,7 +50,6 @@ public class VFXMethods extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		player = new User("Player 1");
 		
 		// Create panes
 		BorderPane layout = new BorderPane();
@@ -63,7 +62,7 @@ public class VFXMethods extends Application {
 		drawCardButton.setText("Draw a Card");
 		drawCardButton.setMaxWidth(100);
 		drawCardButton.setMinWidth(100);
-		drawCardButton.setOnAction(e -> {addCardToHand(player.drawCard());});
+		drawCardButton.setOnAction(e -> {connectionToServer.client.sendTCP(new Request("Draw Card"));});
 		
 		Button textTestButton = new Button();
 		textTestButton.setText("Test text");
@@ -93,16 +92,13 @@ public class VFXMethods extends Application {
 		layout.setRight(actions);
 		layout.setBottom(hand);
 		layout.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
-				
-		// Adding test cards
-		addCardToHand(CardCreator.getInstance().createCard("Stick"));
-		addCardToHand(CardCreator.getInstance().createCard("Stick"));
-		addCardToHand(CardCreator.getInstance().createCard("Stick"));
-		addCardToHand(CardCreator.getInstance().createCard("Sharp Stone"));
-		addCardToHand(CardCreator.getInstance().createCard("Sharp Stone"));
-		addCardToHand(CardCreator.getInstance().createCard("Rope"));
-		addCardToHand(CardCreator.getInstance().createCard("Rope"));
 		
+		// Server setup
+		try {connectionToServer = new JavaClient(this);}
+		catch(Exception e) {System.exit(0);}
+
+		// Player setup
+		connectionToServer.client.sendTCP(new Request("Init User"));
 		
 		// Stage setup
 		primaryStage.setTitle("Wasteland"); // Window title
@@ -134,18 +130,22 @@ public class VFXMethods extends Application {
 	        Point2D dropPoint = new Point2D(e.getSceneX(), e.getSceneY()-(WINDOW_HEIGHT -(CARD_HEIGHT + (CARD_HEIGHT/5))));
 	        
 	        if (dropPoint.getY() < 0 ) {
-	        	discardCard(node);
+	        	// USING A CARD
+	        	Card card = (Card) node.getUserData();
+	        	hand.getChildren().remove(node);
+	        	connectionToServer.client.sendTCP(card);
 	        }
 	        else {
 	        	boolean snap = true;
 		        for (Node child : hand.getChildren()) {
 		            if (child instanceof ImageView && child.equals(node) == false) {
 			        	if (child.getBoundsInParent().contains(dropPoint)) {
+			        		// CRAFTING
 			        		Card result = CardCreator.getInstance().canCraft((Card)node.getUserData(), (Card)child.getUserData());
 			        		if(result != null) {
+			        			// Need to handle crafting server side
 			        			hand.getChildren().remove(node);
 				        		hand.getChildren().remove(child);
-				        		player.discard.addCard(result);
 				        		textNotification("Successfully crafted " + result.getName() + ".");
 				        		snap = false;
 			        		}
@@ -175,15 +175,7 @@ public class VFXMethods extends Application {
 		hand.getChildren().add(image);
 		makeDraggable(image); // Testing draggable
 	}
-	
-	/**
-	 * Removes the visual card from the player and adds the object to the discard pile.
-	 */
-	public void discardCard(ImageView node) {
-		Card card = (Card) node.getUserData();
-		hand.getChildren().remove(node);
-		player.discardCard(card);
-		textNotification(card.getName() + " was discarded.");}
+
 	
 	/**
 	 * A method that creates a text label in the center of the screen to display information to the user.
@@ -206,7 +198,8 @@ public class VFXMethods extends Application {
 	 
 	    ft.play();
 	}
-	
+
+	// A 2D point
 	class Delta {
         double x, y;
     }
