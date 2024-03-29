@@ -17,7 +17,6 @@ public class Network {
 		kryo.register(Deck.class);
 		kryo.register(User.class);
 		kryo.register(Request.class);
-		kryo.register(Text.class);
-		
+		kryo.register(Text.class);	
 	}
 }

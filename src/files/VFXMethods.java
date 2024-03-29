@@ -64,17 +64,17 @@ public class VFXMethods extends Application {
 		drawCardButton.setMinWidth(100);
 		drawCardButton.setOnAction(e -> {connectionToServer.client.sendTCP(new Request("Draw Card"));});
 		
-		Button textTestButton = new Button();
-		textTestButton.setText("Test text");
-		textTestButton.setMaxWidth(100);
-		textTestButton.setMinWidth(100);
-		textTestButton.setOnAction(e -> {textNotification("Welcome to earth!!");});
+		Button printHandButton = new Button();
+		printHandButton.setText("Print Hand");
+		printHandButton.setMaxWidth(100);
+		printHandButton.setMinWidth(100);
+		printHandButton.setOnAction(e -> {connectionToServer.client.sendTCP(new Request("Print Hand"));});
 		
 		actions.setAlignment(Pos.CENTER);
 		actions.setSpacing(10);
 		actions.setMaxWidth(120);
 		actions.setMinWidth(120);
-		actions.getChildren().addAll(drawCardButton, textTestButton);
+		actions.getChildren().addAll(drawCardButton, printHandButton);
 		
 		// Center setup
 		center.setAlignment(Pos.CENTER);
@@ -143,10 +143,21 @@ public class VFXMethods extends Application {
 			        		// CRAFTING
 			        		Card result = CardCreator.getInstance().canCraft((Card)node.getUserData(), (Card)child.getUserData());
 			        		if(result != null) {
-			        			// Need to handle crafting server side
+			        			// Add new card
+			        			result.action = Action.CRAFT;
+			        			connectionToServer.client.sendTCP(result);
+			        			
+			        			// Remove first card
+			        			Card card = (Card) node.getUserData();
+			        			card.action = Action.REMOVEFROMHAND;
+			        			connectionToServer.client.sendTCP(card);
 			        			hand.getChildren().remove(node);
+			        			
+			        			// Remove second card
+			        			card = (Card) child.getUserData();
+			        			card.action = Action.REMOVEFROMHAND;
+			        			connectionToServer.client.sendTCP(card);
 				        		hand.getChildren().remove(child);
-				        		textNotification("Successfully crafted " + result.getName() + ".");
 				        		snap = false;
 			        		}
 			        		break;
@@ -167,6 +178,15 @@ public class VFXMethods extends Application {
 	/**
 	 * Takes a card object and creates a visual representation in the players hand.
 	 */
+	public void removeCardHromHand(Card card) {
+		for (Node child : hand.getChildren()) {
+            if (child instanceof ImageView && child.getUserData().equals(card)) {hand.getChildren().remove(child);}
+		}
+	}
+
+	/**
+	 * Takes a card object and creates a visual representation in the players hand.
+	 */
 	public void addCardToHand(Card card) {
 		ImageView image = new ImageView(card.getImage());
 		image.setFitHeight(CARD_HEIGHT);
@@ -175,14 +195,12 @@ public class VFXMethods extends Application {
 		hand.getChildren().add(image);
 		makeDraggable(image); // Testing draggable
 	}
-
-	
 	/**
 	 * A method that creates a text label in the center of the screen to display information to the user.
 	 */
 	public void textNotification(String text) {
 		Label label = new Label();
-		label.setFont(new Font("Papyrus", 30));
+		label.setFont(new Font("Papyrus", 20));
 		label.setTextFill(Color.WHITE);
 		label.setText(text);
 		

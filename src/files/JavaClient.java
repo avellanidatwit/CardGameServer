@@ -47,10 +47,23 @@ public class JavaClient {
     	
     	// When the server sends a card object, the player draw the card.
 		typeListener.addTypeHandler(Card.class, (connection, card) -> {
-			Platform.runLater(new Runnable() {
-			    @Override
-			    public void run() {
-			    	vfxmethods.addCardToHand(card);}});	
+			if (card.action == Action.DISCARD) {
+				card.action = Action.NONE;
+				Platform.runLater(new Runnable() {
+				    @Override
+				    public void run() {
+				    	vfxmethods.removeCardHromHand(card);
+				    }
+				});	
+			}
+			else {
+				Platform.runLater(new Runnable() {
+				    @Override
+				    public void run() {
+				    	vfxmethods.addCardToHand(card);
+				    }
+				});	
+			}
 		});
 		
 		// When the server sends a card object, the player draw the card.

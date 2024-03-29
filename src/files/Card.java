@@ -14,11 +14,14 @@ public final class Card {
 	final protected int priority;
 	protected int uses, maxUses;
 	
+	public Action action;
+	
 	public Card() {
 		this.NAME = "";
 		this.DESCRIPTION = "";
 		this.IMAGE = "";
 		this.priority = 1;
+		this.action = Action.NONE;
 	}
 	
 	/**
@@ -32,6 +35,7 @@ public final class Card {
 		this.DESCRIPTION = description;
 		this.IMAGE = image;
 		this.priority = 1;
+		this.action = Action.NONE;
 	}
 	
 	public Card(String name, String description, String image, int priority) {
@@ -39,6 +43,7 @@ public final class Card {
 		this.DESCRIPTION = description;
 		this.IMAGE = image;
 		this.priority = priority;
+		this.action = Action.NONE;
 	}
 	
 	/**

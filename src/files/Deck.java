@@ -68,14 +68,16 @@ public class Deck {
 	}
 	
 	/**
-	 * Returns a card in the deck after sorting by priority.
+	 * Returns and removes a card in the deck after sorting by priority.
 	 * @return First card in the priority.
 	 */
 	public Card getCard() {
 		ArrayList<Card> list = this.getCards();
 		Collections.shuffle(list);
 		Collections.sort(list, (o1, o2) -> o1.getPriority() - o2.getPriority());
-		return list.get(0);
+		Card card = list.get(0);
+		this.removeCard(card);
+		return card;
 	}
 	
 	@Override

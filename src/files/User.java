@@ -14,26 +14,19 @@ public final class User {
 	protected Deck pile;
 	protected Deck hand;
 	protected Deck trash;
-	protected Deck discard;
 	protected static int totalId = 0;
 	protected int id;
 	
-	/**
-	 * 0-arg constructor, should never be used.
-	 * @throws IOException
-	 */
 	public User() {
 		super();
 		this.USERNAME = null;
 		this.pile = null;
 		this.trash = null;
-		this.discard = null;
 		this.id = -1;
 	}
 	/**
 	 * 1-arg Constructor
 	 * @param username A user's username.
-	 * @throws IOException
 	 */
 	public User(String username) {
 		// Create id and username
@@ -43,11 +36,10 @@ public final class User {
 		
 		// Add the forest booster to starter deck
 		this.pile = new Deck();
-		pile.addCard(CardCreator.getInstance().createCard("Forest"));
+		pile.addCard(CardCreator.getInstance().createCard("Forest Booster"));
 		
 		// Create the deck objects for the player
 		this.trash = new Deck();
-		this.discard = new Deck();
 		this.hand = new Deck();}
 	
 	/**
@@ -65,31 +57,30 @@ public final class User {
 			hand.addCard(card);
 			return card;
 		}
-		else if (discard.isEmpty() == false) {
-			pile.reshuffleDeck(discard.getCards());
-			discard.emptyDeck();
-			Card card = pile.drawCard();
-			hand.addCard(card);
-			return card;
-		}
 		else return null;}
 	
 	/**
-	 * Adds a card to the discard.
+	 * Removes card from hand and adds to bottom of the pile.
 	 */
 	public void discardCard(Card card) {
-		hand.removeCard(card); 
-		discard.addCard(card);}
+		hand.removeCard(card);
+		moveToPile(card);}
 	
+	/**
+	 * Moves a card to the pile and shuffles it.
+	 */
+	public void moveToPile(Card card) {
+		pile.addCard(card);
+		pile.shuffleDeck();}
 	/**
 	 * Trashes a card in the pile.
 	 */
-	public void destoryPileCard() {
+	public Card destroyPileCard() {
 		Card card = pile.getCard();
-		pile.removeCard(card); 
-		trash.addCard(card);}
+		trash.addCard(card);
+		return card;}
 	
-	public ArrayList<Card> Forest() {
+	public ArrayList<Card> ForestBooster() {
 		int range = randomIntRange(3, 5);
 		ArrayList<Card> list = new ArrayList<Card>();
 		Card card;
@@ -97,17 +88,17 @@ public final class User {
 			switch(randomIntRange(1, 3)) {
 			case 1: 
 				card = CardCreator.getInstance().createCard("Log");
-				discard.addCard(card);
+				moveToPile(card);
 				list.add(card);
 				break;
 			case 2:
 				card = CardCreator.getInstance().createCard("Stone");
-				discard.addCard(card);
+				moveToPile(card);
 				list.add(card);
 				break;
 			case 3:
 				card = CardCreator.getInstance().createCard("Rope");
-				discard.addCard(card);
+				moveToPile(card);
 				list.add(card);
 				break;
 			}
@@ -121,7 +112,7 @@ public final class User {
 		Card card;
 		for (int i = 0; i < range; i++) {
 			card = CardCreator.getInstance().createCard("Stick");
-			discard.addCard(card);
+			moveToPile(card);
 			list.add(card);
 		}
 		return list;
@@ -133,7 +124,7 @@ public final class User {
 		Card card;
 		for (int i = 0; i < range; i++) {
 			card = CardCreator.getInstance().createCard("Sharp Stone");
-			discard.addCard(card);
+			moveToPile(card);
 			list.add(card);
 		}
 		return list;
@@ -144,11 +135,61 @@ public final class User {
 		Card card;
 		for (int i = 0; i < 2; i++) {
 			card = CardCreator.getInstance().createCard("Bandage");
-			discard.addCard(card);
+			moveToPile(card);
 			list.add(card);
 		}
 		return list;
 	}
+
+	public ArrayList<Card> Stick() {
+		ArrayList<Card> list = new ArrayList<Card>();
+		Card card;
+		switch (pile.cards.size()) {
+		case 0:
+			list = null;
+			break;
+		case 1:
+			list.add(pile.getCard());
+			break;
+		default:
+			list.add(pile.getCard());
+			list.add(pile.getCard());
+			break;
+		}
+		return list;
+	}
+	
+	public Card SharpStone() {
+		Card card;
+		if (hand.cards.size() == 0) {return null;}
+		else {
+			card = hand.getCard();
+			return card;}
+	}
+	
+	public ArrayList<Card> Rope() {
+		ArrayList<Card> list = new ArrayList<Card>();
+		Card card;
+		switch (hand.cards.size()) {
+		case 0:
+			list = null;
+			break;
+		case 1:
+			list.add(hand.getCard());
+			break;
+		default:
+			list.add(hand.getCard());
+			list.add(hand.getCard());
+			break;
+		}
+		return list;
+	}
+	/**
+	 * Generates a random number between a min and max(inclusive)
+	 * @param min
+	 * @param max
+	 * @return number between min and max
+	 */
 	public int randomIntRange(int start, int end) {
 	    Random random = new Random();
 	    int number = random.nextInt((end - start) + 1) + start; // see explanation below

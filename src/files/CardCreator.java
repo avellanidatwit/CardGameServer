@@ -20,7 +20,7 @@ class CardCreator {
     private CardCreator()
     {
         cardData = new HashMap<String, Card>(){{
-    		put("Forest", new Card("Forest", "Adds cards from exploring the forest.", "file:src/resources/Forest Booster.png", 0));
+    		put("Forest Booster", new Card("Forest Booster", "Adds cards from exploring the forest.", "file:src/resources/Forest Booster.png", 0));
     	    put("Stick", new Card("Stick", "Destroy 2 cards from opponents deck.", "file:src/resources/Stick.png"));
     	    put("Log", new Card("Log", "Creates 3-2 sticks on use.", "file:src/resources/Log.png"));
     	    put("Stone", new Card("Stone", "Create 2 Sharp Stones.", "file:src/resources/Stone.png"));
