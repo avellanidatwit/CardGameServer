@@ -1,8 +1,5 @@
 package files;
 
 public enum Action {
-	DISCARD,
-	REMOVEFROMHAND,
-	CRAFT,
-	NONE,
+	DISCARD, REMOVEFROMHAND, CRAFT, NONE,
 }

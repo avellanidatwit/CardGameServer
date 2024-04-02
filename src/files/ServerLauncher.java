@@ -3,9 +3,10 @@ package files;
 import java.io.IOException;
 
 public class ServerLauncher {
-	
-		private static JavaServer server;
-		
+
+	@SuppressWarnings("unused")
+	private static JavaServer server;
+
 	public static void main(String[] args) {
 		try {
 			server = new JavaServer();
