@@ -14,6 +14,7 @@ import com.esotericsoftware.kryonet.Server;
  * actions from.
  *
  * @author evelyn
+ * @category Networking
  */
 public class JavaServer {
 

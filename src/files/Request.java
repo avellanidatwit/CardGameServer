@@ -1,5 +1,10 @@
 package files;
 
+/**
+ * A network request
+ * @category Networking
+ * @author evelyn
+ */
 public class Request {
 
 	public String message;

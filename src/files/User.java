@@ -7,6 +7,7 @@ import java.util.Random;
  * Class to establish a user's identity and hand.
  *
  * @author evelyn
+ * @category GameSystems
  */
 public final class User {
 

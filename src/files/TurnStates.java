@@ -4,6 +4,8 @@ package files;
  * Enum for the purpose of controlling the turns
  *
  * @author evelyn
+ * @category GameSystems
+ * @category Networking
  */
 public enum TurnStates {
 	/**

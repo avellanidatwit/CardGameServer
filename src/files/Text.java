@@ -1,5 +1,9 @@
 package files;
 
+/**
+ * A message
+ * @category Networking
+ */
 public class Text {
 	public String message;
 

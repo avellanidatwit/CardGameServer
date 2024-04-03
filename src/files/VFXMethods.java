@@ -27,6 +27,8 @@ import javafx.util.Duration;
  * Main Function Use fadetransition for text
  *
  * @author Dominic Avellani
+ * @category JavaFX
+ * @category GameSystems
  */
 public class VFXMethods extends Application {
 

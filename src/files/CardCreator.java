@@ -3,7 +3,12 @@ package files;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-
+/**
+ * Class to create all the cards locally, because local object storage is hard in literally everything without native JSON support.
+ * @author evelyn
+ * 
+ * @category Cards
+ */
 class CardCreator {
 	private HashMap<String, Card> cardData;
 	private HashMap<ArrayList<String>, Card> recipes = new HashMap<>();
@@ -15,6 +20,9 @@ class CardCreator {
 	// Constructor
 	// Here we will be creating private constructor
 	// restricted to this class itself
+	/**
+	 * Private 0-arg constructor for creating cards
+	 */
 	@SuppressWarnings("serial")
 	private CardCreator() {
 		cardData = new HashMap<>() {
@@ -47,12 +55,21 @@ class CardCreator {
 			}
 		}, createCard("Bandage"));
 	}
-
+	/**
+	 * Creates a card after the initial constructor run.
+	 * @param name Name of card.
+	 * @return The card.
+	 */
 	public Card createCard(String name) {
 		Card card = cardData.get(name);
 		return new Card(card.getName(), card.getImage());
 	}
-
+	/**
+	 * Checks if a card can craft, and if it can it returns the recipes that are available for it.
+	 * @param card1 Card 1 to check with.
+	 * @param card2 Card 2 to check with.
+	 * @return Recipe list(?)
+	 */
 	public Card canCraft(Card card1, Card card2) {
 		@SuppressWarnings("serial")
 		ArrayList<String> input = new ArrayList<>() {
@@ -72,8 +89,10 @@ class CardCreator {
 		return null;
 	}
 
-	// Static method
-	// Static method to create instance of Singleton class
+	/**
+	 * Static method for singleton initialization
+	 * @return An instance of Card Creator.
+	 */
 	public static synchronized CardCreator getInstance() {
 		if (single_instance == null) {
 			single_instance = new CardCreator();

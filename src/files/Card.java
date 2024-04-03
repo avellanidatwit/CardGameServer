@@ -4,6 +4,7 @@ package files;
  * A class to make a card, for use in the game.
  *
  * @author evelyn
+ * @category Cards
  */
 public final class Card {
 	final protected String NAME;
@@ -13,7 +14,9 @@ public final class Card {
 	protected int uses, maxUses;
 
 	public Action action;
-
+	/**
+	 * 0-arg constructor
+	 */
 	public Card() {
 		this.NAME = "";
 		this.IMAGE = "";
@@ -34,7 +37,12 @@ public final class Card {
 		this.priority = 1;
 		this.action = Action.NONE;
 	}
-
+	/**
+	 * 3-arg Constructor
+	 * @param name Name of the card.
+	 * @param image Image of the card.
+	 * @param priority Card priority when played
+	 */
 	public Card(String name, String image, int priority) {
 		this.NAME = name;
 		this.IMAGE = image;

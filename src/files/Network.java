@@ -7,6 +7,7 @@ import com.esotericsoftware.kryonet.EndPoint;
  * Class to handle server side operations
  *
  * @author evelyn
+ * @category Networking
  */
 public class Network {
 

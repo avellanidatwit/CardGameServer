@@ -8,6 +8,7 @@ import java.util.Collections;
  * of cards that will be drawn from.
  *
  * @author evelyn
+ * @category Cards
  */
 public class Deck {
 	protected ArrayList<Card> cards;

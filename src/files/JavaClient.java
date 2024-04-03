@@ -13,6 +13,7 @@ import javafx.application.Platform;
  * A players connection to the game server.
  *
  * @author evelyn
+ * @category Networking
  */
 public class JavaClient {
 	public Client client;
